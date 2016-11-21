@@ -6,8 +6,16 @@ void menu(){
     cout << "Hit or Stay" << endl;
 }
 
-string ShuffleDeck(){
-    return 0;
+void ShuffleDeck(){
+    void shuffleDeck(string deck[]){
+    int r;
+    string hold;
+    for (int i = 0; i <52; i++){
+        r = rand() % 53 ;
+        hold = deck[i];
+        deck [i]= deck [r];
+        deck [r] = hold;
+    }
 }
 
 string* initializeDeck(){
