@@ -38,17 +38,20 @@ void menu(){
     cout << "Hit or Stay" << endl;
 }
 
-void shuffleDeck(string deck[])
-{
-    int r;
+//emily fixed shuffle deck
+void shuffleDeck(string deck[]){
+    int r =0;
     string hold;
     for (int i = 0; i <52; i++){
-        r = rand() % 53 ;
+        srand( static_cast<unsigned int>(time(NULL)));
+        r = rand() % 52 ;
         hold = deck[i];
         deck [i]= deck [r];
         deck [r] = hold;
+        hold = "";
     }
 }
+
 
 void dealACard(string deck[])
 {
@@ -87,95 +90,95 @@ void displayRules()
 Whether or not the dealer must hit on a soft 17 (a hand of 17 containing an ace being counted as 11) differs from casino to casino. There might even be blackjack tables with different rules within the same casino.
 }
 
-string* initializeDeck()
-{
+//Emily fixed the initialize deck
+string* initializeDeck(){
     string* deck = new string [52];
-    for (int i = 1; i<14; i++){
-        string cardNum; to_string(i +1);
-        if (i == 10){
+    string cardNum = "";
+    for (int i = 0; i<=12; i++){
+        if (i == 9){
             cardNum = "J";
         }
-        else if (i == 11){
+        else if (i == 10){
             cardNum = "Q";
-
+            
         }
-        else if (i == 12 ){
+        else if (i == 11 ){
             cardNum = "K";
-
+            
         }
-        else if (i == 13){
+        else if (i == 12){
             cardNum = "A";
         }
         else {
-            cardNum = to_string(i +1);
+            cardNum = to_string(i+2);
         }
         deck[i]= cardNum + "S";
+        
     }
-    for (int i = 1; i<14; i++){
-        string cardNum; to_string(i +1);
-        if (i == 10){
+    for (int i = 0; i<=12; i++){
+        if (i == 9){
             cardNum = "J";
         }
-        else if (i == 11){
+        else if (i == 10){
             cardNum = "Q";
-
+            
         }
-        else if (i == 12 ){
+        else if (i == 11 ){
             cardNum = "K";
-
+            
         }
-        else if (i == 13){
+        else if (i == 12){
             cardNum = "A";
         }
         else {
-            cardNum = to_string(i +1);
+            cardNum = to_string(i+2);
         }
         deck[i+13]= cardNum + "D";
-
+        
     }
-    for (int i = 1; i<14; i++){
-        string cardNum; to_string(i +1);
-        if (i == 10){
+  
+    for (int i = 0; i<=12; i++){
+        if (i == 9){
             cardNum = "J";
         }
-        else if (i == 11){
+        else if (i == 10){
             cardNum = "Q";
-
+            
         }
-        else if (i == 12 ){
+        else if (i == 11 ){
             cardNum = "K";
-
+            
         }
-        else if (i == 13){
+        else if (i == 12){
             cardNum = "A";
         }
         else {
-            cardNum = to_string(i +1);
+            cardNum = to_string(i+2);
         }
         deck[i+26]= cardNum + "C";
-
+       
     }
-    for (int i = 1; i<14; i++){
-        string cardNum; to_string(i +1);
-        if (i == 10){
+    
+    for (int i = 0; i<=12; i++){
+        if (i == 9){
             cardNum = "J";
         }
-        else if (i == 11){
+        else if (i == 10){
             cardNum = "Q";
-
+            
         }
-        else if (i == 12 ){
+        else if (i == 11 ){
             cardNum = "K";
-
+            
         }
-        else if (i == 13){
+        else if (i == 12){
             cardNum = "A";
         }
         else {
-            cardNum = to_string(i +1);
+            cardNum = to_string(i+2);
         }
         deck[i+39]= cardNum + "H";
-
+        
     }
     return deck;
 }
