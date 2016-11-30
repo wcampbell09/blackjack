@@ -217,7 +217,7 @@ void hit (string deck[], string hand [])
     deck [i]= "empty";
 }
 //saves who the dealer is in a string, either player or computer based on if player says yes or no.
-void getDealer (string option, string dealer)
+string getDealer (string option, string dealer)
 {
     cout << "Deal Yes or No?" << endl;
     cin >> option ;
@@ -230,6 +230,7 @@ void getDealer (string option, string dealer)
     {
         dealer = "computer";
     }
+    return dealer;
 }
 //added by emily. checks the card value by first character in card string, returns an int value.
 int checkCard (string card)
@@ -294,7 +295,7 @@ bool isInt(int n)
 {
     int i = 0;
     string str = to_string(n);
-    for(i = 0; i < str.length(); i++)
+    for(i = 0; i <= str.length(); i++)
     {
         if((str.at(i))!=('.'))
         {
@@ -324,6 +325,23 @@ void game (string deck [], string dealer)
     int playerValue = 0;
     cout<< "How much money would you like to gamble?" << endl;
     cin>> playerValue;
+    cin.clear();
+    cin.ignore(1000,'\n');
+    
+    while(true)
+    {
+        if(playerValue==0)
+        {
+            cout<< "Please enter an integer value." << endl;
+            cin >> playerValue;
+            cin.clear();
+            cin.ignore(1000,'\n');
+        }
+        else
+        {
+            break;
+        }
+    }
     
     
     while (i > 3)
@@ -344,30 +362,32 @@ void game (string deck [], string dealer)
         //gambling portion:
         int n = 0;
         
-        //
-        //
-        //
-        //
-        //DOES NOT WORK FOR AN INVALID INPUT... NEED TO FIX
+
+        cout<< "How much would you like to wager?" << endl;
+        cin >> n;
+        cin.clear();
+        cin.ignore(1000,'\n');
         while(true)
         {
-            cout<< "How much would you like to wager?" << endl;
-            cin>> n;
-            if(n <= playerValue)
+            if(n==0)
             {
-                if(isInt(n))
-                {
-                    cout<< "Please enter an integer value." << endl;
-                }
-                else
-                {
+                cout<< "Please enter an integer value." << endl;
+                cin >> n;
+                cin.clear();
+                cin.ignore(1000,'\n');
+            }
+            else if(n <= playerValue)
+            {
                     playerValue -= n;
                     break;
-                }
             }
             else
             {
                 cout<< "You cannot wager more than you have." << endl;
+                cout<< "Please enter a smaller value." << endl;
+                cin >> n;
+                cin.clear();
+                cin.ignore(1000,'\n');
             }
         }
         
@@ -569,6 +589,10 @@ void game (string deck [], string dealer)
                 cout<< "You have $"  << playerValue << endl;
             }
         }
+        if (playerValue==0){
+            cout<< "You have no money left" << endl;
+            break;
+        }
         cout << endl;
         if(i< 20)
         {
@@ -606,8 +630,8 @@ int main(int argc, const char * argv[]) {
         else if (option == 3){
             //play the game
             string option="";
-            string dealer;
-            getDealer (option, dealer);
+            string dealer = "";
+            dealer = getDealer (option, dealer);
             string* deck = initializeDeck();
             shuffleDeck (deck);
             game (deck, dealer);
