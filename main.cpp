@@ -292,11 +292,11 @@ void initializeHand (string hand[])
 
 bool isInt(int n)
 {
-    int i = 0
-    string str = n.toString();
+    int i = 0;
+    string str = to_string(n);
     for(i = 0; i < str.length(); i++)
     {
-        if((str->substr(i, i+1))->equals("."))
+        if((str.at(i))!=('.'))
         {
             return false;
         }
@@ -344,13 +344,18 @@ void game (string deck [], string dealer)
         //gambling portion:
         int n = 0;
         
+        //
+        //
+        //
+        //
+        //DOES NOT WORK FOR AN INVALID INPUT... NEED TO FIX
         while(true)
         {
             cout<< "How much would you like to wager?" << endl;
             cin>> n;
             if(n <= playerValue)
             {
-                if(!isInt(n))
+                if(isInt(n))
                 {
                     cout<< "Please enter an integer value." << endl;
                 }
@@ -394,12 +399,14 @@ void game (string deck [], string dealer)
             
             cout << "Hit or Stay" << endl;
             cin>> move;
-            while(!move.equals("Hit") || ! move.equals("Stay"))
-            {
-                cout<< "Please enter Hit or Stay only." << endl;
-                cout << "Hit or Stay" << endl;
-                cin>> move;
-            }
+            
+            //STUCK IN INFINITE FOR LOOP...  This is suppose to check if it is Hit or Stay
+            //while(move.compare("Hit")!=0 || move.compare("Stay")!=0)
+           // {
+            //    cout<< "Please enter Hit or Stay only." << endl;
+           //     cout << "Hit or Stay" << endl;
+            //    cin>> move;
+          //  }
             //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
             //if any cards are an ace the player is asked what value they would like it to hold.
             if (move == "Stay"){
