@@ -387,13 +387,19 @@ void game (string deck [], string dealer)
         
         while (move=="Hit" && playerFinal<=21)
         {
-            if (playerFinal==21){
-                
+            if (playerFinal==21)
+            {
                 break;
             }
+            
             cout << "Hit or Stay" << endl;
             cin>> move;
-            cout << endl;
+            while(!move.equals("Hit") || ! move.equals("Stay"))
+            {
+                cout<< "Please enter Hit or Stay only." << endl;
+                cout << "Hit or Stay" << endl;
+                cin>> move;
+            }
             //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
             //if any cards are an ace the player is asked what value they would like it to hold.
             if (move == "Stay"){
