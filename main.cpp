@@ -323,6 +323,13 @@ void game (string deck [], string dealer)
         deal (deck, compHand);
         i -= 4;//subtracts 4 from card pile because 2 cards are dealt to each player
         
+        //gambling portion:
+        int n = 0;
+        int playerValue = 0;
+        cout<< "How much would you like to wager? 1, 5, 10, 50, or 100?" << endl;
+        cin>> n;
+        playerValue += n;
+        
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
         int j=0;
         while (playerHand[j]!= "" && j<=51)
@@ -476,19 +483,29 @@ void game (string deck [], string dealer)
         //checks to see if comp or player won the round
          if (playerFinal > 21)
         {
-            cout << "you loose, over 21"<<endl;
+            cout << "you loose, over 21\n"<<endl;
+            //Gambling portion:
+            playerValue -= n;
+            cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > playerFinal && compFinal <=21 )
         {
-            cout << "you loose, computer wins"<< endl;
+            cout << "you loose, computer wins\n"<< endl;
+            //Gambling portion:
+            playerValue -= n;
+            cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > 21 && playerFinal <= 21)
         {
-            cout << "You win computer over 21 "<< endl;
+            cout << "You win. Computer over 21 \n"<< endl;
+            playerValue += n;
+            cout<< "You have $"  << playerValue << endl;
         }
         else if (playerFinal > compFinal && playerFinal <=21)
         {
-            cout << "You win "<< endl;
+            cout << "You win.\n "<< endl;
+            playerValue += n;
+            cout<< "You have $"  << playerValue << endl;
         }
         //this is in case of tie, checks to see who dealer was and gives them the win.
         else {
@@ -499,6 +516,8 @@ void game (string deck [], string dealer)
             else
             {
                 cout << "computer wins the tie"<< endl;
+                playerValue -= n;
+                cout<< "You have $"  << playerValue << endl;
             }
         }
         cout << endl;
