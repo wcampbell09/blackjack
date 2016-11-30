@@ -306,7 +306,6 @@ void game (string deck [], string dealer)
     int i = 52;//value of number of cards in deck is used to check how many cards are left in pile throughout the game
     
     int round=1;
-    int n;
     
     int playerValue = 0;
     cout<< "How much money would you like to gamble?" << endl;
@@ -524,12 +523,13 @@ void game (string deck [], string dealer)
             }
         }
         cout << endl;
-        if(i< 12)
+        if(i< 20)
         {
+            i=52;
+            deck = initializeDeck();
             shuffleDeck(deck);
         }
     }
-    cout << "out of cards";
 }
 
 int main(int argc, const char * argv[]) {
