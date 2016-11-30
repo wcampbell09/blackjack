@@ -308,7 +308,7 @@ void game (string deck [], string dealer)
     int round=1;
     int n;
     
-     int playerValue = 0;
+    int playerValue = 0;
     cout<< "How much money would you like to gamble?" << endl;
     cin>> playerValue;
     
@@ -485,13 +485,13 @@ void game (string deck [], string dealer)
         }
         
         //checks to see if comp or player won the round
-         if (playerFinal > 21)
+        if (playerFinal > 21)
         {
             cout << "you loose, over 21"<<endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
-        else if (compFinal > playerFinal && compFinal <=21 )
+        else if (compFinal > playerFinal && compFinal <=21)
         {
             cout << "you loose, computer wins"<< endl;
             //Gambling portion:
@@ -511,9 +511,11 @@ void game (string deck [], string dealer)
         }
         //this is in case of tie, checks to see who dealer was and gives them the win.
         else {
-            if (dealer == "player")
+            if (dealer == "player" )
             {
                 cout << "you win the tie"<< endl;
+                playerValue += 2*n;
+                cout<< "You have $"  << playerValue << endl;
             }
             else
             {
