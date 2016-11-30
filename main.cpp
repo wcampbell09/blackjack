@@ -308,6 +308,11 @@ void game (string deck [], string dealer)
     int round=1;
     int n;
     
+     int playerValue = 0;
+    cout<< "How much money would you like to gamble?" << endl;
+    cin>> playerValue;
+    
+    
     while (i > 3)
     {
         string move="Hit";//determines whether player wants to hit or stay
@@ -325,10 +330,9 @@ void game (string deck [], string dealer)
         
         //gambling portion:
         int n = 0;
-        int playerValue = 0;
-        cout<< "How much would you like to wager? 1, 5, 10, 50, or 100?" << endl;
+        cout<< "How much would you like to wager?" << endl;
         cin>> n;
-        playerValue += n;
+        playerValue -= n;
         
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
         int j=0;
@@ -483,28 +487,26 @@ void game (string deck [], string dealer)
         //checks to see if comp or player won the round
          if (playerFinal > 21)
         {
-            cout << "you loose, over 21\n"<<endl;
+            cout << "you loose, over 21"<<endl;
             //Gambling portion:
-            playerValue -= n;
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > playerFinal && compFinal <=21 )
         {
-            cout << "you loose, computer wins\n"<< endl;
+            cout << "you loose, computer wins"<< endl;
             //Gambling portion:
-            playerValue -= n;
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > 21 && playerFinal <= 21)
         {
-            cout << "You win. Computer over 21 \n"<< endl;
-            playerValue += n;
+            cout << "You win. Computer over 21"<< endl;
+            playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
         else if (playerFinal > compFinal && playerFinal <=21)
         {
-            cout << "You win.\n "<< endl;
-            playerValue += n;
+            cout << "You win."<< endl;
+            playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
         //this is in case of tie, checks to see who dealer was and gives them the win.
@@ -516,7 +518,6 @@ void game (string deck [], string dealer)
             else
             {
                 cout << "computer wins the tie"<< endl;
-                playerValue -= n;
                 cout<< "You have $"  << playerValue << endl;
             }
         }
