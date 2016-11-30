@@ -222,7 +222,7 @@ void getDealer (string option, string dealer)
     cout << "Deal Yes or No?" << endl;
     cin >> option ;
     
-    if (option == "yes")
+    if (option == "Yes")
     {
         dealer = "player";
     }
