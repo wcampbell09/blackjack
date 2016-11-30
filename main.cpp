@@ -524,6 +524,10 @@ void game (string deck [], string dealer)
             }
         }
         cout << endl;
+        if(i< 12)
+        {
+            shuffleDeck(deck);
+        }
     }
     cout << "out of cards";
 }
