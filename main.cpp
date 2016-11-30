@@ -282,12 +282,12 @@ int checkCard (string card)
 //initialize card hand
 void initializeHand (string hand[])
 {
-
+    
     for (int i=0; i<52; i++)
     {
         hand[i]="";
     }
-
+    
 }
 
 //added by emily. plays the game, sort of, i think??
@@ -313,7 +313,7 @@ void game (string deck [], string dealer)
         string move="Hit";//determines whether player wants to hit or stay
         initializeHand(playerHand);
         initializeHand(compHand);
-
+        
         playerFinal=0;
         int compFinal=0;
         
@@ -340,59 +340,66 @@ void game (string deck [], string dealer)
             j++;
         }
         cout << "your move: " << playerFinal<< endl;
-
+        
         while (move=="Hit" && playerFinal<=21)
         {
-        cout << "Hit or Stay" << endl;
-        cin>> move;
-        cout << endl;
-        //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
-        //if any cards are an ace the player is asked what value they would like it to hold.
-        if (move == "Hit" )
-        {
-            hit (deck, playerHand);
-            i --;
-            int j=0;
-            
-            while (playerHand[j]!= "" && j<=51)
-            {
-                j++;
-            }
-            cout << playerHand [j-1]<< endl ;
-            
-            playerCard=checkCard(playerHand[j-1]);
-               
-            if (playerCard==11)
-            {
-            cout << "would you like your ace to be worth 1 or 11?"<< endl;
-            cin >> playerCard;
-          }
+            if (playerFinal==21){
                 
-                playerFinal=playerFinal+playerCard;
-                j++;
-            
-            cout << "your move: " << playerFinal<< endl;
-        }
-        //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
-        else if (move == "Stay")
-        {
-            n=0;
-            int playerFinal=0;
-            while (playerHand[n]!= "" && n<=51)
+                break;
+            }
+            cout << "Hit or Stay" << endl;
+            cin>> move;
+            cout << endl;
+            //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
+            //if any cards are an ace the player is asked what value they would like it to hold.
+            if (move == "Stay"){
+                break;
+            }
+            if (move == "Hit" )
             {
-                playerCard=checkCard(playerHand[n]);
+                hit (deck, playerHand);
+                i --;
+                int j=0;
+                
+                while (playerHand[j]!= "" && j<=51)
+                {
+                    j++;
+                }
+                cout << playerHand [j-1]<< endl ;
+                
+                playerCard=checkCard(playerHand[j-1]);
+                
                 if (playerCard==11)
                 {
                     cout << "would you like your ace to be worth 1 or 11?"<< endl;
                     cin >> playerCard;
                 }
+                
                 playerFinal=playerFinal+playerCard;
-                n++;
+                j++;
+                
+                cout << "your move: " << playerFinal<< endl;
             }
-             cout << "your move: " << playerFinal<< endl;
+            //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
+            else if (move == "Stay")
+            {
+                n=0;
+                int playerFinal=0;
+                while (playerHand[n]!= "" && n<=51)
+                {
+                    playerCard=checkCard(playerHand[n]);
+                    if (playerCard==11)
+                    {
+                        cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                        cin >> playerCard;
+                    }
+                    playerFinal=playerFinal+playerCard;
+                    n++;
+                }
+                cout << "your move: " << playerFinal<< endl;
+            }
         }
-        }
-    
+        
         //the following is for the computer. checks the card values dealt. if any are A's then decides to make 1 or 11 based on
         //value of other card. if the sum of cards is less than 17, then the computer will hit. if it is more than it will stay.
         
@@ -414,27 +421,30 @@ void game (string deck [], string dealer)
             }
             j++;
         }
-            if (count>0)
+        if (count>0)
+        {
+            for (int k = 1; k<=count; k++)
             {
-                for (int k = 1; k<=count; k++)
+                if (compFinal <= 10 )
                 {
-                    if (compFinal <= 10 )
-                    {
-                        compFinal = compFinal+11;
-                    }
-                    else
-                    {
-                        compFinal = compFinal+11;
-                    }
+                    compFinal = compFinal+11;
                 }
-            
+                else
+                {
+                    compFinal = compFinal+11;
+                }
             }
+            
+        }
         cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player their hand
         cout << "computer move: " << compFinal<< endl;
         m=2;
         
         while (compFinal<17)
         {
+            if (playerFinal>21){
+                break;
+            }
             hit (deck, compHand);
             
             compCard = checkCard (compHand [m]);
@@ -464,21 +474,21 @@ void game (string deck [], string dealer)
         }
         
         //checks to see if comp or player won the round
-        if (compFinal > 21 && playerFinal <= 21)
+         if (playerFinal > 21)
         {
-            cout << "You win "<< endl;
+            cout << "you loose, over 21"<<endl;
+        }
+        else if (compFinal > playerFinal && compFinal <=21 )
+        {
+            cout << "you loose, computer wins"<< endl;
+        }
+        else if (compFinal > 21 && playerFinal <= 21)
+        {
+            cout << "You win computer over 21 "<< endl;
         }
         else if (playerFinal > compFinal && playerFinal <=21)
         {
             cout << "You win "<< endl;
-        }
-        else if (playerFinal > 21 && compFinal <= 21)
-        {
-            cout << "you loose "<<endl;
-        }
-        else if (compFinal > playerFinal && compFinal <=21 )
-        {
-            cout << "you loose"<< endl;
         }
         //this is in case of tie, checks to see who dealer was and gives them the win.
         else {
@@ -486,7 +496,7 @@ void game (string deck [], string dealer)
             {
                 cout << "you win the tie"<< endl;
             }
-            else 
+            else
             {
                 cout << "computer wins the tie"<< endl;
             }
@@ -497,44 +507,43 @@ void game (string deck [], string dealer)
 }
 
 int main(int argc, const char * argv[]) {
-   // QApplication a(argc, argv);
-   // blackjack w;
-   // w.show();
+    // QApplication a(argc, argv);
+    // blackjack w;
+    // w.show();
     
-
+    
     int option;
     
     cout << "Welcome to blackjack!!"<< endl;
     while (option !=4)
     {
-    cout<< "\n1. View Rules "<<endl <<"2. Tutorial"<<endl<<"3. Play Game"<<endl<<"4. Exit"<<endl;
-    cin >> option;
-    
-    if (option ==1 ){
-        //display rules
-        displayRules();
+        cout<< "\n1. View Rules "<<endl <<"2. Tutorial"<<endl<<"3. Play Game"<<endl<<"4. Exit"<<endl;
+        cin >> option;
         
-    }
-    
-    else if (option == 2){
-        //tutorial
-    }
-    
-    else if (option == 3){
-        //play the game
-        string option="";
-        string dealer;
-        getDealer (option, dealer);
-        string* deck = initializeDeck();
-        shuffleDeck (deck);
-        game (deck, dealer);
+        if (option ==1 ){
+            //display rules
+            displayRules();
+            
+        }
         
-    }
+        else if (option == 2){
+            //tutorial
+        }
+        
+        else if (option == 3){
+            //play the game
+            string option="";
+            string dealer;
+            getDealer (option, dealer);
+            string* deck = initializeDeck();
+            shuffleDeck (deck);
+            game (deck, dealer);
+            
+        }
         else
         {
             exit(0);
-        
+            
         }
     }
 }
-
