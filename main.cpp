@@ -290,6 +290,20 @@ void initializeHand (string hand[])
     
 }
 
+bool isInt(int n)
+{
+    int i = 0
+    string str = n.toString();
+    for(i = 0; i < str.length(); i++)
+    {
+        if((str->substr(i, i+1))->equals("."))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 //added by emily. plays the game, sort of, i think??
 void game (string deck [], string dealer)
 {
@@ -329,9 +343,29 @@ void game (string deck [], string dealer)
         
         //gambling portion:
         int n = 0;
-        cout<< "How much would you like to wager?" << endl;
-        cin>> n;
-        playerValue -= n;
+        
+        while(true)
+        {
+            cout<< "How much would you like to wager?" << endl;
+            cin>> n;
+            if(n <= playerValue)
+            {
+                if(!isInt(n))
+                {
+                    cout<< "Please enter an integer value." << endl;
+                }
+                else
+                {
+                    playerValue -= n;
+                    break;
+                }
+            }
+            else
+            {
+                cout<< "You cannot wager more than you have." << endl;
+            }
+        }
+        
         
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
         int j=0;
