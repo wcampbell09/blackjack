@@ -418,7 +418,7 @@ void blackJack (string deck [], string dealer)
             playerFinal=playerFinal+playerCard;
             j++;
         }
-        cout << "your move: " << playerFinal<< endl;
+        cout << "Your hand value: " << playerFinal<< endl;
         
         while (move=="Hit" && playerFinal<=21)
         {
