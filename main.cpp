@@ -351,27 +351,7 @@ void blackJack (string deck [], string dealer)
     
     int round=1;
     
-    int playerValue = 0;
-    cout<< "How much money would you like to gamble?" << endl;
-    cin>> playerValue;
-    cin.clear();
-    cin.ignore(1000,'\n');
-    
-    while(true)
-    {
-        if(playerValue==0)
-        {
-            cout<< "Please enter an integer value." << endl;
-            cin >> playerValue;
-            cin.clear();
-            cin.ignore(1000,'\n');
-        }
-        else
-        {
-            break;
-        }
-    }
-    
+    int playerValue = 1000;
     
     while (i > 3)
     {
