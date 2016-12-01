@@ -373,6 +373,7 @@ void blackJack (string deck [], string dealer)
         
 
         cout<< "How much would you like to wager?" << endl;
+        cout<< "Your money: $1000" << endl;
         cin >> n;
         cin.clear();
         cin.ignore(1000,'\n');
