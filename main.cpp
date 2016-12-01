@@ -4,13 +4,17 @@
 #include <string>
 using namespace std;
 
+
+//deals a card to the user, takes in the deck as an array
 void dealACard(string deck[])
 {
+    //the use of a static int allows us to save where we are in the deck when this method is used repeatedly 
     static int num = 0;
     cout<< deck[num];
+    //the number is added to every time the deck is called in order for us to be a spot up in the deck when the method is called again 
     num++;
 }
-
+// Simply displays all the rules of blackjack 
 void displayRules()
 {
     cout<< "Your aim is to achieve a hand where all the cards add up as close as possible but do not exceed 21.";
@@ -45,11 +49,14 @@ void displayRules()
 //Emily fixed the initialize deck
 string* initializeDeck()
 {
+    //creates the deck 
     string* deck = new string [52];
+    //a string will be used for the cardNum since we also need the suit to be part of the card 
     string cardNum = "";
-    
+    // based on the current value of "int i" cardNum will be set to that card
     for (int i = 0; i<=12; i++)
     {
+        //when i = 9-12 we substitute a number for J,Q,K,A which is obivously Jack, Queen, King, and Ace
         if (i == 9)
         {
             cardNum = "J";
@@ -68,12 +75,14 @@ string* initializeDeck()
         }
         else
         {
+            //if it is not a face card then simply add 2 to i since cardnum starts at 0 and the first card is "2" 
             cardNum = to_string(i+2);
         }
+        // cardNum + S since this particular loop contributes to the "spades" of our deck 
         deck[i]= cardNum + "S";
         
     }
-    
+    // We use 3 more for loops for the 3 remianing suits, they are essentially the same as the first 
     for (int i = 0; i<=12; i++)
     {
         if (i == 9)
@@ -98,6 +107,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+        //Since the spades makes up the first part of the deck we must go forward 13 for diamonds 
         deck[i+13]= cardNum + "D";
         
     }
@@ -126,6 +136,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+         //move up 26 for Clubs
         deck[i+26]= cardNum + "C";
         
     }
@@ -153,13 +164,14 @@ string* initializeDeck()
         else
         {
             cardNum = to_string(i+2);
-        }
+        } 
+        //move up 39 for hearts
         deck[i+39]= cardNum + "H";
         
     }
     return deck;
 }
-
+//prints out each value within the deck array by simply iterating through the 52 spots of the array 
 void displayDeck(string deck[])
 {
     for (int i=0; i<=52; i++)
@@ -168,17 +180,23 @@ void displayDeck(string deck[])
     }
 }
 //emily fixed shuffle deck
+//method to shuffle the deck 
 void shuffleDeck(string deck[])
 {
     int r =0;
+    //string hold will hold the value of deck[i] so that we may set the random spot in the deck to the value of deck[i]
     string hold;
     for (int i = 0; i <52; i++)
     {
         srand( static_cast<unsigned int>(time(NULL)));
+        //r becomes a random integerin the range 0 to 52
         r = rand() % 52 ;
         hold = deck[i];
+        //the deck at [i] now becomes the value of the deck at the spot of the random integer
         deck [i]= deck [r];
+        //the deck at spot of the random integer becomes what the value of deck[i] used to be
         deck [r] = hold;
+        //set hold back equal to nothing before we go to the next i value
         hold = "";
     }
 }
@@ -186,12 +204,16 @@ void shuffleDeck(string deck[])
 void deal (string deck[], string hand[])
 {
     int i=0;
+    //this loop iterates through the deck until we find a spot in the deck that has a card and is not "empty" 
     while (deck[i]== "empty" && i<52)
     {
         i++;
     }
+    // the first spot in the player or computer's hand is now equal to the current value of the deck which should not be empty 
     hand [0]=deck [i];
+     //once we assign that card to the hand then that spot becomes "empty" since it's no longer in the virtual deck 
     deck [i]= "empty";
+    //this is essentially the same as the first while loop except it gives the user/computer their second card 
     while (deck[i]== "empty" && i<52)
     {
         i++;
@@ -209,6 +231,7 @@ void hit (string deck[], string hand [])
     {
         i++;
     }
+    //iterates through the hand until we find an empty spot to put the card that the user has "hit"
     while (hand[j]!= "" && j<=51)
     {
         j++;
@@ -236,7 +259,7 @@ string getDealer (string option, string dealer)
 int checkCard (string card)
 {
     int cardValue;
-    
+    //for cards that are not face cards then the value of the card is simply the number on the card
     if (card.at(0) == '2')
     {
         cardValue = 2;
@@ -269,11 +292,13 @@ int checkCard (string card)
     {
         cardValue = 9;
     }
+    //if the card starts with 'A' then it is an Ace and its value is 11
     else if (card.at(0) == 'A')
     {
         cardValue = 11;
     }
     else
+        //otherwise the card is a facecard and in blackjack all face cards other than the Ace have  a value of 10 
     {
         cardValue = 10;
     }
@@ -283,14 +308,14 @@ int checkCard (string card)
 //initialize card hand
 void initializeHand (string hand[])
 {
-    
+    // initializes card hand by making each spot equal to an empty string
     for (int i=0; i<52; i++)
     {
         hand[i]="";
     }
     
 }
-
+//checks to make sure an integer the user enters to gamble is in fact an integer 
 bool isInt(int n)
 {
     int i = 0;
@@ -637,8 +662,10 @@ int main(int argc, const char * argv[]) {
             game (deck, dealer);
             
         }
-        else
+        else if (option == 4)
         {
+            cout << "Thanks for playing!"; 
+            
             exit(0);
             
         }
