@@ -430,7 +430,7 @@ void blackJack (string deck [], string dealer)
             
             if (playerCard==11)
             {
-                cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                 cin >> playerCard;
             }
             
@@ -477,7 +477,7 @@ void blackJack (string deck [], string dealer)
                 
                 if (playerCard==11)
                 {
-                    cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                    cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                     cin >> playerCard;
                 }
                 
@@ -496,13 +496,13 @@ void blackJack (string deck [], string dealer)
                     playerCard=checkCard(playerHand[n]);
                     if (playerCard==11)
                     {
-                        cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                        cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                         cin >> playerCard;
                     }
                     playerFinal=playerFinal+playerCard;
                     n++;
                 }
-                cout << "your move: " << playerFinal<< endl;
+                cout << "Your move: " << playerFinal<< endl;
             }
         }
         
@@ -543,7 +543,7 @@ void blackJack (string deck [], string dealer)
             
         }
         cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player their hand
-        cout << "computer move: " << compFinal<< endl;
+        cout << "Computer move: " << compFinal<< endl;
         m=2;
         
         while (compFinal<17)
@@ -575,26 +575,26 @@ void blackJack (string deck [], string dealer)
             
             m++;
             
-            cout << "computer move: "<< compFinal<< endl;
+            cout << "Computer move: "<< compFinal<< endl;
             
         }
         
         //checks to see if comp or player won the round
         if (playerFinal > 21)
         {
-            cout << "you loose, over 21"<<endl;
+            cout << "You lose, your hand is over 21"<<endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > playerFinal && compFinal <=21)
         {
-            cout << "you loose, computer wins"<< endl;
+            cout << "You lose, computer wins"<< endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > 21 && playerFinal <= 21)
         {
-            cout << "You win. Computer over 21"<< endl;
+            cout << "You win. Computer's hand is over 21"<< endl;
             playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
@@ -608,13 +608,13 @@ void blackJack (string deck [], string dealer)
         else {
             if (dealer == "player" )
             {
-                cout << "you win the tie"<< endl;
+                cout << "You win the tie"<< endl;
                 playerValue += 2*n;
                 cout<< "You have $"  << playerValue << endl;
             }
             else
             {
-                cout << "computer wins the tie"<< endl;
+                cout << "Computer wins the tie"<< endl;
                 cout<< "You have $"  << playerValue << endl;
             }
         }
