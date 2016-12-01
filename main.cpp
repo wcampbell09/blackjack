@@ -645,7 +645,7 @@ int main(int argc, const char * argv[]) {
     {
         cout<<"1. Play a game" << endl;
         cout<<"2. About Casino" << endl;
-        cout<<"2. Exit"<<endl;
+        cout<<"3. Exit"<<endl;
         cin >> option;
         
         if (option ==1 ){
@@ -667,6 +667,7 @@ int main(int argc, const char * argv[]) {
                 cout << "1. View rules" << endl;
                 cout << "2. Play Blackjack" << endl;
                 cout << "3. Go to main menu" << endl;
+                cin >>blackjackMenu;
                 if(blackjackMenu == 1)
                 {
                     //Displays the rules for blackjack
@@ -813,8 +814,9 @@ int main(int argc, const char * argv[]) {
     
     else if (option == 3){
         
-        cout << "Thanks for playing!";
+        cout << "Thanks for playing!" << endl;
         exit(0);
         }
     }
 }
+
