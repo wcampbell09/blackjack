@@ -76,7 +76,8 @@ string* initializeDeck()
         else
         {
             //if it is not a face card then simply add 2 to i since cardnum starts at 0 and the first card is "2" 
-            cardNum = to_string(i+2);
+            int w = i+2;
+            cardNum = "" + w;
         }
         // cardNum + S since this particular loop contributes to the "spades" of our deck 
         deck[i]= cardNum + "S";
@@ -105,7 +106,8 @@ string* initializeDeck()
         }
         else
         {
-            cardNum = to_string(i+2);
+            int w = i+2;
+            cardNum = "" + w;
         }
         //Since the spades makes up the first part of the deck we must go forward 13 for diamonds 
         deck[i+13]= cardNum + "D";
@@ -134,7 +136,8 @@ string* initializeDeck()
         }
         else
         {
-            cardNum = to_string(i+2);
+            int w = i+2;
+            cardNum = "" + w;
         }
          //move up 26 for Clubs
         deck[i+26]= cardNum + "C";
@@ -163,7 +166,8 @@ string* initializeDeck()
         }
         else
         {
-            cardNum = to_string(i+2);
+            int w = i+2;
+            cardNum = "" + w;
         } 
         //move up 39 for hearts
         deck[i+39]= cardNum + "H";
@@ -319,7 +323,7 @@ void initializeHand (string hand[])
 bool isInt(int n)
 {
     int i = 0;
-    string str = to_string(n);
+    string str = "" + n;
     for(i = 0; i <= str.length(); i++)
     {
         if((str.at(i))!=('.'))
