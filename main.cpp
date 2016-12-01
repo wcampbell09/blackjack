@@ -632,6 +632,12 @@ void blackJack (string deck [], string dealer)
     }
 }
 
+int main(int argc, const char * argv[]) {
+    // QApplication a(argc, argv);
+    // blackjack w;
+    // w.show();
+    
+    
     int option;
     
     cout << "Welcome to the Casino!"<< endl;
