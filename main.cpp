@@ -643,7 +643,7 @@ int main(int argc, const char * argv[]) {
     cout << "Welcome to blackjack!!"<< endl;
     while (option !=4)
     {
-        cout<< "\n1. View Rules "<<endl <<"2. Tutorial"<<endl<<"3. Play Game"<<endl<<"4. Exit"<<endl;
+        cout<< "\n1. View Rules "<<endl <<"2. Tutorial"<<endl<<"3. Play BlackJack" << endl<< "4. Play GoldFish"<<endl<<"5. Exit"<<endl;
         cin >> option;
         
         if (option ==1 ){
@@ -668,10 +668,12 @@ int main(int argc, const char * argv[]) {
         }
         else if (option == 4)
         {
+            goldFish();
+        }
+        else if (option == 5)
+        {
             cout << "Thanks for playing!"; 
-            
             exit(0);
-            
         }
     }
 }
