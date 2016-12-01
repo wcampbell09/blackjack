@@ -687,7 +687,7 @@ int main(int argc, const char * argv[]) {
                     option = 1;
                 }
             }
-            if (gameOption == 2)
+            else if (gameOption == 2)
             {
                 int goFishMenu = 0;
                 cout << "Lets play some Go Fish!" << endl;
@@ -708,6 +708,100 @@ int main(int argc, const char * argv[]) {
                 {
                     option = 1;
                 }
+            }
+            
+            else if (gameOption == 3)
+            {
+                int slotsMenu = 0;
+                cout << "Lets play some Slots!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Slots" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> slotsMenu;
+                if(slotsMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (slotsMenu == 2)
+                {
+                    //play the game
+                }
+                else if (slotsMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            
+            else if (gameOption == 4)
+            {
+                int yahtzeeMenu = 0;
+                cout << "Lets play some Yahtzee!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Slots" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> yahtzeeMenu;
+                if(yahtzeeMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (yahtzeeMenu == 2)
+                {
+                    //play the game
+                }
+                else if (yahtzeeMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 5)
+            {
+                int rouletteMenu = 0;
+                cout << "Lets play some Roulette!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Roulette" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> rouletteMenu;
+                if(rouletteMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (rouletteMenu == 2)
+                {
+                    //play the game
+                }
+                else if (rouletteMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 6)
+            {
+                int oldMaidMenu = 0;
+                cout << "Lets play some Old Maid!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Old Maid" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> oldMaidMenu;
+                if(oldMaidMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (oldMaidMenu == 2)
+                {
+                    //play the game
+                }
+                else if (oldMaidMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 7)
+            {
+                option = 1;
             }
         }
         
