@@ -335,7 +335,7 @@ bool isInt(int n)
 }
 
 //added by emily. plays the game, sort of, i think??
-void game (string deck [], string dealer)
+void blackJack (string deck [], string dealer)
 {
     //still need to incorporate gambling. still need to check that i did this right based off of the rules
     
@@ -663,7 +663,7 @@ int main(int argc, const char * argv[]) {
             dealer = getDealer (option, dealer);
             string* deck = initializeDeck();
             shuffleDeck (deck);
-            game (deck, dealer);
+            blackJack (deck, dealer);
             
         }
         else if (option == 4)
