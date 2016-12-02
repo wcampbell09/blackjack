@@ -2,6 +2,7 @@
 //#include <QApplication>
 #include <iostream>
 #include <string>
+#include <random>
 using namespace std;
 
 
@@ -193,6 +194,7 @@ void shuffleDeck(string deck[])
     {
         mt19937 rng (std::random_device{}());
         uniform_int_distribution<> dist (0, 51);
+        auto r = dist (rng);
         hold = deck[i];
         //the deck at [i] now becomes the value of the deck at the spot of the random integer
         deck [i]= deck [r];
