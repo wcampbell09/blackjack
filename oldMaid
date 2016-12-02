@@ -1,3 +1,7 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
 string* initializeDeck()
 {
     string* deck = new string [52];
@@ -113,4 +117,231 @@ string* initializeDeck()
         
     }
     return deck;
+}
+
+void displayDeck(string deck[])
+{
+    for (int i=0; i<=52; i++)
+    {
+        cout << deck[i] << endl;
+    }
+}
+//emily fixed shuffle deck
+void shuffleDeck(string deck[])
+{
+    int r =0;
+    string hold;
+    for (int i = 0; i <52; i++)
+    {
+        srand( static_cast<unsigned int>(time(NULL)));
+        r = rand() % 52 ;
+        hold = deck[i];
+        deck [i]= deck [r];
+        deck [r] = hold;
+        hold = "";
+    }
+}
+
+string* checkDuplicates(string a [], int &i, int length)		//only a will be rereturned.
+{
+	//If a pair is found, they will both be set to empty and i will decrease by 2.
+	int num = 0;
+	int counter;
+	displayDeck(a);
+	cout<<"\n\n";
+	while(num < length)
+	{
+		if(a[num].compare("empty") != 0)
+		{
+			counter = num+1;
+			while(counter < length)
+			{
+				if(a[num].substr(0, a[num].length()-1).compare(a[counter].substr(0, a[counter].length()-1)) == 0)
+				{
+					a[num] = "empty";
+					a[counter] = "empty";
+					i = i-2;
+					break;
+				}
+				counter++;
+			}
+		}
+		num++;
+	}
+	displayDeck(a);
+	return a;
+}
+
+void oldMaid(string deck [])
+{
+	//There are 53 cards instead of 52, because the 53rd card is the joker 
+	//making the arrays for each player by splitting the deck array
+	string* hand1 = new string [26];
+	for(int i = 0; i < 26; i++)
+	{
+		hand1[i] = deck[i];
+	}
+	
+	string* hand2 = new string [27];
+	for(int i = 0; i < 26; i++)
+	{
+		hand2[i] = deck[i+26];
+	}
+	hand2[26] = "JOKER";
+	
+	int notEmptyHand1 = 26;
+	int notEmptyHand2 = 27;
+	hand1 = checkDuplicates(hand1, notEmptyHand1, 26);
+	hand2 = checkDuplicates(hand2, notEmptyHand2, 27);
+	
+	//shuffle the two hand decks
+	shuffleDeck(hand1);
+	shuffleDeck(hand2);
+	
+	while(true)		//will continue until either hand1 or hand2 have only one card- the joker.
+	{
+		//1st turn- player 1 chooses from player 2's deck
+		int index = -1;
+		if(index < 1 || index > notEmptyHand2)
+		{
+			cout<< "Player 1: Choose a card from Player 2's deck. Choose a number between 1 and " << notEmptyHand2 << "." << endl;
+			cin>> index;
+			if(index < 1 || index > notEmptyHand2)
+			{
+				cout<<"Please choose a number within the given range." << endl;
+			}
+		}
+		index--;		//to get index proper.
+		
+		//change the value of the index depending on the number of empty spaces
+		//get the card that Player1 now has
+		int counter = 0;
+		int i = 0;
+		while(counter < 27 && i != index)
+		{
+			if(hand2[i].compare("empty") != 0)		//If it is not empty
+			{
+				i++;
+			}
+			counter++;
+		}
+		index = counter;
+		
+		//replace one of the empty spaces in hand1's array with this card
+		counter = 0;
+		for(counter = 0; counter < 26; counter++)		//This will go through the hand1 array
+		{
+			if(hand1[counter].compare("empty"))
+			{
+				hand1[counter] = hand2[index];
+				notEmptyHand1++;
+				hand2[index] = "empty";
+				notEmptyHand2--;
+				break;
+			}
+		}
+		
+		//check to see if the card chosen is a joker
+		if(hand1[counter].compare("JOKER") == 0)
+		{
+			cout<< "Player 1 have the joker!";
+		}
+		else
+		{
+			hand1 = checkDuplicates(hand1, notEmptyHand1, 26);
+		}
+		
+		//shuffle Player1's deck
+		shuffleDeck(hand1);
+		
+		//check to see if player 2 won
+		if(notEmptyHand2 == 0)
+		{
+			cout<< "Player 2 wins!" << endl;
+			break;
+		}
+		else if (notEmptyHand1 == 0)
+		{
+			cout<< "Player 1 wins!" << endl;
+			break;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		//2nd turn- player 2 chooses from player 1's deck
+		index = -1;
+		if(index < 1 || index > notEmptyHand1)
+		{
+			cout<< "Player 2: Choose a card from Player 1's deck. Choose a number between 1 and " << notEmptyHand1 << "." << endl;
+			cin>> index;
+			if(index < 1 || index > notEmptyHand1)
+			{
+				cout<<"Please choose a number within the given range." << endl;
+			}
+		}
+		index--;		//to get index proper.
+		
+		//change the value of the index depending on the number of empty spaces
+		counter = 0;
+		i = 0;
+		while(counter < 26 && i != index)		//goes through hand1 array
+		{
+			if(hand1[i].compare("empty") != 0)		//If it is not empty
+			{
+				i++;
+			}
+			counter++;
+		}
+		index = counter;
+		
+		//replace one of the empty spaces in hand2's array with this card. Hand2 is gaining a card.
+		counter = 0;
+		for(counter = 0; counter < 27; counter++)		//This will go through the hand2 array
+		{
+			if(hand2[counter].compare("empty") == 0)
+			{
+				hand2[counter] = hand1[index];
+				notEmptyHand2++;
+				hand1[index] = "empty";
+				notEmptyHand1--;
+				break;
+			}
+		}
+		
+		//check to see if the card chosen is a joker
+		if(hand2[counter].compare("JOKER") == 0)
+		{
+			cout<< "Player 2 has the joker!";
+		}
+		else
+		{
+			hand2 = checkDuplicates(hand2, notEmptyHand2, 27);
+		}
+		
+		//shuffle Player2's deck
+		shuffleDeck(hand2);
+		
+		//check to see if player 1 won
+		if(notEmptyHand1 == 0)
+		{
+			cout<< "Player 1 wins!" << endl;
+			break;
+		}
+		else if (notEmptyHand2 == 0)
+		{
+			cout<< "Player 2 wins!" << endl;
+			break;
+		}
+	}
+}
+
+int main()
+{   
+    oldMaid(initializeDeck());
+    
 }
