@@ -355,12 +355,13 @@ void blackJack (string deck [], string &dealer)
     
     while ((i > 3) && playerValue > 0)
     {
-        string move="Hit";//determines whether player wants to hit or stay
+        string move="Hit";    //determines whether player wants to hit or stay
+        //below initializes each hand to null strings
         initializeHand(playerHand);
         initializeHand(compHand);
        
         playerFinal=0;
-        int compFinal=0;
+        int compFinal=0;//sum of cards from the computer
         
         cout<< "Round "<<round++ <<endl;
         //plays the game until the deck runs out
@@ -368,35 +369,30 @@ void blackJack (string deck [], string &dealer)
         deal (deck, compHand);
         i -= 4;//subtracts 4 from card pile because 2 cards are dealt to each player
         
-        //gambling portion:
+        //gambling portion: displays the money that the player has to gamble and asks them how much they would like to wager for that
+        //specifice round
         int n = 0;
-        
-        //
-        //
-        //
-        //
-        //DOES NOT WORK FOR AN INVALID INPUT... NEED TO FIX
         cout<< "How much would you like to wager?" << endl;
         cout<< "Your money: $" << playerValue << endl;
         cin >> n;
-        cin.clear();
-        cin.ignore(1000,'\n');
+        cin.clear();//error handling
+        cin.ignore(1000,'\n');//error handling for bad input
         while(true)
         {
             if(n==0)
             {
-                cout<< "Please enter an integer value." << endl;
+                cout<< "Please enter an integer value." << endl;//asked if player doesn't enter an integer
                 cin >> n;
                 cin.clear();
                 cin.ignore(1000,'\n');
             }
 
-            else if(n <= playerValue)
+            else if(n <= playerValue)//if the player wagers a proper amount, the amount is subtracted from the pot of money they have to gamble
             {
                 playerValue -= n;
                 break;
             }
-            else
+            else//runs if the player enters an integer value that exceeds how much money they actually have to gamble
             {
                 cout<< "You cannot wager more than you have." << endl;
                 cout<< "Please enter a smaller value." << endl;
@@ -405,7 +401,8 @@ void blackJack (string deck [], string &dealer)
                 cin.ignore(1000,'\n');
             }
         }
-        
+        //if the computer is the dealer than only one of the computers cards in its hand is displayed.
+        //otherwise if the player is the dealer then both of the computers cards in its hand are displayed to the player
         if (dealer == "player")
         {
             cout<< "Computer's hand is: " << compHand[0] << " " << compHand[1]<<endl;
@@ -414,7 +411,11 @@ void blackJack (string deck [], string &dealer)
         {
             cout<< "Computer's hand is: " << compHand[0]<<endl;
         }
+        
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
+        //the following increments through the players hand and check each element in the array that has a card.
+        //if the card is an Ace the player is asked if they would like that ace to be worth 1 or 11. then the playerFinal
+        //value is updated for each card which keeps track of what the players hand adds up to with each card. 
         int j=0;
         while (playerHand[j]!= "" && j<=51)
         {
@@ -429,60 +430,68 @@ void blackJack (string deck [], string &dealer)
             
             playerFinal=playerFinal+playerCard;
             j++;
-        }
+        }//ends the while loop
+        //displays to the player what their cards add up to 
         cout << "Your hand value: " << playerFinal<< endl;
-       
+            //if the hand adds to 21 then the player is finished playing and is not asked to hit or stay because 21 is a winnning hand
             if (playerFinal==21)
             {
                 cout << "Your hand value: " << playerFinal<< endl;
                 
             }
+            //if the players hand doesnt sum to 21 then the player is asked if they would like to hit or stay.  
             else {
             cout << "Hit or Stay" << endl;
             cin>> move;
             }
-            //STUCK IN INFINITE FOR LOOP...  This is suppose to check if it is Hit or Stay
-            //while(move.compare("Hit")!=0 || move.compare("Stay")!=0)
-            // {
-            //    cout<< "Please enter Hit or Stay only." << endl;
-            //     cout << "Hit or Stay" << endl;
-            //    cin>> move;
-            //  }
-            //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
-            //if any cards are an ace the player is asked what value they would like it to hold.
+            
+            //if player wants to hit, subtracts 1 from i (the card pile) checks values of cards and sums them.
+            //if any cards are an ace the player is asked what value they would like it to hold (1 or 11).
+        
+        //if move is stay then nothing is done because the player is choosing to leave their hand the way it is
             if (move == "Stay" || move == "stay"){
             }
+        //if the move is hit the player enters this while loop which allows them to keeo hitting until they choose to stop or the player
+        //hits or goes over 21. 
             else if (move == "Hit" || "hit" )
             {
+                
                 while (move == "Hit" || "hit"){
                     hit (deck, playerHand);
-                    i --;
+                    i --;//like before a card is subtracted from the deck for every hit the player chooses
                     int j=0;
-                
+                  //after a hit the card value is checked and playerfinal is updated to see what the players hand adds up to.
                     while (playerHand[j]!= "" && j<=51)
                     {
                         j++;
                     }
-                    cout << playerHand [j-1]<< endl ;
+                    
+                    cout << playerHand [j-1]<< endl ;// card that was hit is displayed to the player
                 
                     playerCard=checkCard(playerHand[j-1]);
                     
-                    if (playerCard==11)
+                    if (playerCard==11)// if the card is an ace the player is asked how much they want it to be worth
                     {
                         cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                         cin >> playerCard;
                     }
                 
-                    playerFinal=playerFinal+playerCard;
+                    playerFinal=playerFinal+playerCard;//playerFinal is updated 
                     j++;
+                    //if playerFinal is over 21 the player is notified and the program leaves the hit while loop because the player
+                    //is not allowed to continue playing after they have gone over 21( they lost, unless the computer also goes over)
                     if(playerFinal > 21)
                     {
                         cout << "You went over 21" << endl;
                         break;
                     }
+                    //The over all hand value is displayed the player
                     cout << "Your hand value: " << playerFinal<< endl;
+                    //the player is again asked if the want to hit or stay
                     cout << "Hit or Stay?"<<endl;
                     cin>> move;
+                    //if they stay then the program exits the hit while loop and playerFinal remains where it is
+                    //if player chooses to hit then the program runs through the while loop again. 
                     if (move == "Stay" || move == "stay")
                     {
                         cout << "Your hand value: " << playerFinal<< endl;
@@ -490,10 +499,7 @@ void blackJack (string deck [], string &dealer)
                     }
                 }
             }
-            //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
-        
-
-
+           
         //the following is for the computer. checks the card values dealt. if any are A's then decides to make 1 or 11 based on
         //value of other card. if the sum of cards is less than 17, then the computer will hit. if it is more than it will stay.
         
@@ -501,48 +507,58 @@ void blackJack (string deck [], string &dealer)
         int count=0;
         j=0;
         int m;
-        while (compHand[j]!= "" && j<=51)
+        while (compHand[j]!= "" && j<=51)//runs through comps hand while there are card values in it
         {
-            compCard=checkCard(compHand[j]);
+            compCard=checkCard(compHand[j]);//checks the value of the computers card
+            // if the card isnt an Ace then the card is added to the computer's final hand value
             if (compCard!=11)
             {
                 compFinal=compFinal+ compCard;
                 
             }
+            //if it is an ace then the Aces are kept track of through the count value;
             else
             {
                 count=count+1;
             }
             j++;
-        }
+        }//ends the while loop
+        
+        //this runs through to make a decision on what value any Ace should be assigned (1 or 11) if the computer is 
+        //drawn one of those 
         if (count>0)
         {
             for (int k = 1; k<=count; k++)
             {
+                //these run to check so that the computers hand doesnt go over 21 based on the ace values
                 if (compFinal <= 10 )
                 {
                     compFinal = compFinal+11;
                 }
                 else
                 {
-                    compFinal = compFinal+11;
+                    compFinal = compFinal+1;//makes the ace value 1 if the hand is worth something greater then 10.
                 }
             }
             
         }
-        cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player their hand
-        cout << "Computer move: " << compFinal<< endl;
+        cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player the computers hand 
+        cout << "Computer move: " << compFinal<< endl;//shows how much the move was worth
         m=2;
         
+        //computer will hit if their hand is worth less than 17
         while (compFinal<17)
         {
-            if (playerFinal>21){
+            if (playerFinal>21){//if the player final is over 21 then the computer doesnt have to make a move because it already won
                 break;
             }
-            hit (deck, compHand);
+            hit (deck, compHand);//hit move for the computer
+            i--;
             
-            compCard = checkCard (compHand [m]);
+            compCard = checkCard (compHand [m]);//checks the card that was hit
             
+            //checks to see if the card is an ace again and decides what value to assign it based off of what the 
+            //computers hand is worth
             if (compCard == 11 && compFinal <= 10)
             {
                 
@@ -557,35 +573,44 @@ void blackJack (string deck [], string &dealer)
                 
             }
             
-            compFinal += compCard;
             
-            cout<< compHand[m]<< endl;
+            compFinal += compCard;//updates the value of comps hand based off the hit move
+            
+            cout<< compHand[m]<< endl;//shows to the player the card that the computer got after the hit
             
             m++;
             
-            cout << "Computer move: "<< compFinal<< endl;
+            cout << "Computer move: "<< compFinal<< endl;//displays the computers hand value
             
-        }
+        }//end of while loop
         
         //checks to see if comp or player won the round
+        
+        //if the player is over 21 then the player looses and is displayed how much money they lost
         if (playerFinal > 21)
         {
             cout << "You lose, your hand is over 21"<<endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
+        //if the the computers hand is greater than the players hand and they are each under 21, then the computer wins
+        //and player looses the money they had gambled
         else if (compFinal > playerFinal && compFinal <=21)
         {
             cout << "You lose, computer wins"<< endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
+        //if the computers hand went over 21 and the players didnt then the player wins the round and the money they gambled is added 
+        //to their pot of money 
         else if (compFinal > 21 && playerFinal <= 21)
         {
             cout << "You win. Computer hand is over 21"<< endl;
             playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
+        //if the players hand is greater than the computers hand and they didnt go over 21, then the player wins the round 
+        //and the player gets the money that they gambled.
         else if (playerFinal > compFinal && playerFinal <=21)
         {
             cout << "You win."<< endl;
@@ -607,6 +632,8 @@ void blackJack (string deck [], string &dealer)
             }
         }
         cout << endl;
+        //this only runs if the deck has less than 20 cards in it. if it does then the deck is re-initialized and shuffled so that 
+        //the game can continue to run. 
         if(i< 20)
         {
             i=52;
