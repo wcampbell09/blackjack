@@ -583,7 +583,6 @@ void game (string deck [], string dealer)
         }
     }
 }
-
 int main(int argc, const char * argv[]) {
     // QApplication a(argc, argv);
     // blackjack w;
@@ -592,41 +591,183 @@ int main(int argc, const char * argv[]) {
     
     int option;
     
-    cout << "Welcome to blackjack!!"<< endl;
-    while (option !=4)
+    cout << "Welcome to the Casino!"<< endl;
+    while (option !=3)
     {
-        cout<< "\n1. View Rules "<<endl <<"2. Tutorial"<<endl<<"3. Play Game"<<endl<<"4. Exit"<<endl;
+        cout<<"1. Play a game" << endl;
+        cout<<"2. About Casino" << endl;
+        cout<<"3. Exit"<<endl;
         cin >> option;
         
         if (option ==1 ){
-            //display rules
-            displayRules();
+            int gameOption = 0;
+            cout<< "What game would you like to play?" << endl;
+            cout<< "1. Blackjack" << endl;
+            cout<< "2. Go fish" << endl;
+            cout<< "3. Slots" << endl;
+            cout<< "4. Roulette" << endl;
+            cout<< "5. Yahtzee" << endl;
+            cout<< "6. Old maid" << endl;
+            cout<< "7. Main menu" << endl;
+            cin >> gameOption;
             
+            if (gameOption == 1)
+            {
+                int blackjackMenu = 0;
+                cout << "Lets play some Blackjack!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Blackjack" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >>blackjackMenu;
+                if(blackjackMenu == 1)
+                {
+                    //Displays the rules for blackjack
+                    displayRules();
+                }
+                else if (blackjackMenu == 2)
+                {
+                    //play the game
+                    string option="";
+                    string dealer = "";
+                    dealer = getDealer(option, dealer);
+                    string* deck = initializeDeck();
+                    shuffleDeck (deck);
+                    blackJack (deck, dealer);
+                }
+                else if (blackjackMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 2)
+            {
+                int goFishMenu = 0;
+                cout << "Lets play some Go Fish!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Go Fish" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> goFishMenu;
+                if(goFishMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (goFishMenu == 2)
+                {
+                    //play the game
+                }
+                else if (goFishMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            
+            else if (gameOption == 3)
+            {
+                int slotsMenu = 0;
+                cout << "Lets play some Slots!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Slots" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> slotsMenu;
+                if(slotsMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (slotsMenu == 2)
+                {
+                    //play the game
+                }
+                else if (slotsMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            
+            else if (gameOption == 4)
+            {
+                int yahtzeeMenu = 0;
+                cout << "Lets play some Yahtzee!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Slots" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> yahtzeeMenu;
+                if(yahtzeeMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (yahtzeeMenu == 2)
+                {
+                    //play the game
+                }
+                else if (yahtzeeMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 5)
+            {
+                int rouletteMenu = 0;
+                cout << "Lets play some Roulette!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Roulette" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> rouletteMenu;
+                if(rouletteMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (rouletteMenu == 2)
+                {
+                    //play the game
+                }
+                else if (rouletteMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 6)
+            {
+                int oldMaidMenu = 0;
+                cout << "Lets play some Old Maid!" << endl;
+                cout << "1. View rules" << endl;
+                cout << "2. Play Old Maid" << endl;
+                cout << "3. Go to main menu" << endl;
+                cin >> oldMaidMenu;
+                if(oldMaidMenu == 1)
+                {
+                    //Displays the rules for go fish
+                    
+                }
+                else if (oldMaidMenu == 2)
+                {
+                    //play the game
+                }
+                else if (oldMaidMenu == 3)
+                {
+                    option = 1;
+                }
+            }
+            else if (gameOption == 7)
+            {
+                option = 1;
+            }
         }
         
-        else if (option == 2){
-            //tutorial
-        }
+    
+    else if (option == 2){
+        //Who made the games, about betting casino stuff
         
-        else if (option == 3){
-            //play the game
-            string option="";
-            string dealer;
-            getDealer (option, dealer);
-            string* deck = initializeDeck();
-            shuffleDeck (deck);
-            game (deck, dealer);
-            
-        }
-        else if (option == 4 ){
-            string* deck = initializeDeck();
-            shuffleDeck (deck);
-            
-        }
-        else
-        {
-            exit(0);
-            
+    }
+    
+    else if (option == 3){
+        
+        cout << "Thanks for playing!" << endl;
+        exit(0);
         }
     }
 }
+
