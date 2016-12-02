@@ -46,13 +46,17 @@ Inititalize deck returns an array of strings. Each element in the array is a str
 52 cards will be put into the array. This is intialized through a series of for loops that put in a card number, 2-10 or face card 
 values of A,K,Q,J. Each for loop also assigns a suit to the card that is either S for spades, D for diamonds, C for clubs, and H for hearts.
 */
+
 string* initializeDeck()
 {
+    //creates the deck 
     string* deck = new string [52];
+    //a string will be used for the cardNum since we also need the suit to be part of the card 
     string cardNum = "";
-    
+    // based on the current value of "int i" cardNum will be set to that card
     for (int i = 0; i<=12; i++)
     {
+        //when i = 9-12 we substitute a number for J,Q,K,A which is obivously Jack, Queen, King, and Ace
         if (i == 9)
         {
             cardNum = "J";
@@ -73,10 +77,11 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+        // cardNum + S since this particular loop contributes to the "spades" of our deck 
         deck[i]= cardNum + "S";
         
     }
-    
+    // We use 3 more for loops for the 3 remianing suits, they are essentially the same as the first
     for (int i = 0; i<=12; i++)
     {
         if (i == 9)
@@ -101,6 +106,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+        //Since the spades makes up the first part of the deck we must go forward 13 for diamonds
         deck[i+13]= cardNum + "D";
         
     }
@@ -129,6 +135,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+        //move up 26 for Clubs
         deck[i+26]= cardNum + "C";
         
     }
@@ -157,6 +164,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
+        //move up 39 for hearts
         deck[i+39]= cardNum + "H";
         
     }
