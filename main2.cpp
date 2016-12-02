@@ -9,12 +9,6 @@
 #include <string>
 using namespace std;
 
-void dealACard(string deck[])
-{
-    static int num = 0;
-    cout<< deck[num];
-    num++;
-}
 
 void displayRules()
 {
@@ -47,7 +41,11 @@ void displayRules()
     /*Whether or not the dealer must hit on a soft 17 (a hand of 17 containing an ace being counted as 11) differs from casino to casino. There might even be blackjack tables with different rules within the same casino.*/
 }
 
-//Emily fixed the initialize deck
+/*
+Inititalize deck returns an array of strings. Each element in the array is a string value that represents a card.
+52 cards will be put into the array. This is intialized through a series of for loops that put in a card number, 2-10 or face card 
+values of A,K,Q,J. Each for loop also assigns a suit to the card that is either S for spades, D for diamonds, C for clubs, and H for hearts.
+*/
 string* initializeDeck()
 {
     string* deck = new string [52];
@@ -164,7 +162,7 @@ string* initializeDeck()
     }
     return deck;
 }
-
+//this method just displays each card in the deck array.
 void displayDeck(string deck[])
 {
     for (int i=0; i<=52; i++)
@@ -172,7 +170,10 @@ void displayDeck(string deck[])
         cout << deck[i] << endl;
     }
 }
-//emily fixed shuffle deck
+/*
+this method shuffles the deck of cards. It takes in the deck array as a parameter. It uses a random generator to swap cards in the
+array to different, random indexes throughout the array. 
+*/
 void shuffleDeck(string deck[])
 {
     int r =0;
@@ -187,7 +188,7 @@ void shuffleDeck(string deck[])
         hold = "";
     }
 }
-//added by emily makes next card in deck read "empty" adds that string to an array for the player or computer's hand
+//
 void deal (string deck[], string hand[])
 {
     int i=0;
