@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <time.h>
 using namespace std;
 
 string* initializeDeck()
@@ -29,8 +30,7 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
-        deck[i]= cardNum + "S";
-        
+        deck[i]= cardNum + "S"; 
     }
     
     for (int i = 0; i<=12; i++)
@@ -121,7 +121,7 @@ string* initializeDeck()
 
 void displayDeck(string deck[])
 {
-    for (int i=0; i<=52; i++)
+    for (int i=0; i<52; i++)
     {
         cout << deck[i] << endl;
     }
@@ -131,10 +131,10 @@ void shuffleDeck(string deck[])
 {
     int r =0;
     string hold;
-    for (int i = 0; i <52; i++)
+    for (int i = 0; i<52; i++)
     {
-        srand( static_cast<unsigned int>(time(NULL)));
-        r = rand() % 52 ;
+        srand(static_cast<unsigned int>(time(NULL)));
+        r = (rand() *1000) % 52;
         hold = deck[i];
         deck [i]= deck [r];
         deck [r] = hold;
@@ -145,9 +145,17 @@ void shuffleDeck(string deck[])
 string* checkDuplicates(string a [], int &i, int length)		//only a will be rereturned.
 {
 	//If a pair is found, they will both be set to empty and i will decrease by 2.
+	int w = 0;
+	while(w < length)
+	{
+		cout<< a[w] << endl;
+		w++;
+	}
+	
+	cout<< "\n\n\n\n";
+	
 	int num = 0;
 	int counter;
-	displayDeck(a);
 	cout<<"\n\n";
 	while(num < length)
 	{
@@ -168,7 +176,14 @@ string* checkDuplicates(string a [], int &i, int length)		//only a will be reret
 		}
 		num++;
 	}
-	displayDeck(a);
+	
+	w = 0;
+	while(w < length)
+	{
+		cout<< a[w] << endl;
+		w++;
+	}
+	cout<< "\n\n\n\n";
 	return a;
 }
 
@@ -176,6 +191,7 @@ void oldMaid(string deck [])
 {
 	//There are 53 cards instead of 52, because the 53rd card is the joker 
 	//making the arrays for each player by splitting the deck array
+	shuffleDeck(deck);
 	string* hand1 = new string [26];
 	for(int i = 0; i < 26; i++)
 	{
@@ -189,6 +205,7 @@ void oldMaid(string deck [])
 	}
 	hand2[26] = "JOKER";
 	
+	cout<< "here?? after assigning the 2 sep arrays \n";
 	int notEmptyHand1 = 26;
 	int notEmptyHand2 = 27;
 	hand1 = checkDuplicates(hand1, notEmptyHand1, 26);
@@ -265,14 +282,7 @@ void oldMaid(string deck [])
 			cout<< "Player 1 wins!" << endl;
 			break;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		//2nd turn- player 2 chooses from player 1's deck
 		index = -1;
 		if(index < 1 || index > notEmptyHand1)
@@ -342,6 +352,9 @@ void oldMaid(string deck [])
 
 int main()
 {   
-    oldMaid(initializeDeck());
+	string* a = initializeDeck();
+	shuffleDeck(a);
+	//displayDeck(a);
+    oldMaid(a);
     
 }
