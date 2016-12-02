@@ -189,27 +189,36 @@ array to different, random indexes throughout the array.
 void shuffleDeck(string deck[])
 {
     int r =0;
+    //string hold will hold the value of deck[i] so that we may set the random spot in the deck to the value of deck[i]
     string hold;
     for (int i = 0; i <52; i++)
     {
         srand( static_cast<unsigned int>(time(NULL)));
         r = rand() % 52 ;
         hold = deck[i];
+         //the deck at [i] now becomes the value of the deck at the spot of the random integer
         deck [i]= deck [r];
+        //the deck at spot of the random integer becomes what the value of deck[i] used to be
         deck [r] = hold;
+        //set hold back equal to nothing before we go to the next i value
         hold = "";
     }
 }
-//
+//method deals cards from the deck array to a hand array (either the player or computers)
+//takes in the deck and either the player or computers hand array as parameters.
 void deal (string deck[], string hand[])
 {
     int i=0;
+    //this loop iterates through the deck until we find a spot in the deck that has a card and is not "empty" 
     while (deck[i]== "empty" && i<52)
     {
         i++;
     }
+    // the first spot in the player or computer's hand is now equal to the current value of the deck which should not be empty 
     hand [0]=deck [i];
+     //once we assign that card to the hand then that spot becomes "empty" since it's no longer in the virtual deck 
     deck [i]= "empty";
+    //this is essentially the same as the first while loop except it gives the user/computer their second card 
     while (deck[i]== "empty" && i<52)
     {
         i++;
@@ -218,7 +227,8 @@ void deal (string deck[], string hand[])
     deck [i]= "empty";
     
 }
-//added by emily. called when someone decides to hit does the same thing as deal but only one card is given.
+
+//called when someone decides to hit does the same thing as deal but only one card is given.
 void hit (string deck[], string hand [])
 {
     int i=0;
@@ -227,6 +237,7 @@ void hit (string deck[], string hand [])
     {
         i++;
     }
+    //iterates through the hand until we find an empty spot to put the card that the user has "hit"
     while (hand[j]!= "" && j<=51)
     {
         j++;
@@ -234,7 +245,9 @@ void hit (string deck[], string hand [])
     hand [j]=deck [i];
     deck [i]= "empty";
 }
+
 //saves who the dealer is in a string, either player or computer based on if player says yes or no.
+//used in blackjack because the dealer wins the tie of a round. 
 void getDealer (string option, string &dealer)
 {
     cout << "Do you want to play as dealer: Yes or No?" << endl;
@@ -249,7 +262,7 @@ void getDealer (string option, string &dealer)
         dealer = "computer";
     }
 }
-//added by emily. checks the card value by first character in card string, returns an int value.
+//Checks the card value by first character in card string, returns an int value.
 int checkCard (string card)
 {
     int cardValue;
