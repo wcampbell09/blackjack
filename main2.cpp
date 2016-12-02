@@ -167,7 +167,7 @@ string* initializeDeck()
 
 void displayDeck(string deck[])
 {
-    for (int i=0; i<52; i++)
+    for (int i=0; i<=52; i++)
     {
         cout << deck[i] << endl;
     }
@@ -329,7 +329,7 @@ void blackJack (string deck [], string &dealer)
     int playerValue = 1000;
     
     
-    while (i > 3)
+    while ((i > 3) && playerValue > 0)
     {
         string move="Hit";//determines whether player wants to hit or stay
         initializeHand(playerHand);
@@ -366,6 +366,7 @@ void blackJack (string deck [], string &dealer)
                 cin.clear();
                 cin.ignore(1000,'\n');
             }
+
             else if(n <= playerValue)
             {
                 playerValue -= n;
@@ -410,7 +411,7 @@ void blackJack (string deck [], string &dealer)
             if (playerFinal==21)
             {
                 cout << "Your hand value: " << playerFinal<< endl;
-                break;
+                
             }
             else {
             cout << "Hit or Stay" << endl;
@@ -426,9 +427,8 @@ void blackJack (string deck [], string &dealer)
             //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
             //if any cards are an ace the player is asked what value they would like it to hold.
             if (move == "Stay" || move == "stay"){
-                break;
             }
-            if (move == "Hit" || "hit" )
+            else if (move == "Hit" || "hit" )
             {
                 while (move == "Hit" || "hit"){
                     hit (deck, playerHand);
@@ -467,7 +467,6 @@ void blackJack (string deck [], string &dealer)
                 }
             }
             //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
-
         
 
 
@@ -592,6 +591,25 @@ void blackJack (string deck [], string &dealer)
         }
     }
 }
+
+void printRulesRoulette()
+{
+    cout << "In roulette the player will choose to place bets on single number," << endl;
+    cout << "red or black, and odd or even. There are numbers 0, 00, and 1 to 36." << endl;
+    cout << "Numbers from 1 to 10 and 19 to 28, odd numbers are red and even are black." << endl;
+    cout << "Numbers in the range of 11 to 18 and 29 to 36, odd numbers are black" << endl;
+    cout << "In this specific version you'll start with $1000 and keep" << endl;
+    cout << "wagering until you run out of money. This is American Roulette" << endl;
+    cout << "Good luck and have fun!" << endl;
+}
+
+void printMenuRoulette()
+{
+    cout<< "1. Bet on red or black" << endl;
+    cout<< "2. Bet on even or odd numbers" << endl;
+    cout<< "3. Bet on a single number" << endl;
+}
+
 int main(int argc, const char * argv[]) {
     // QApplication a(argc, argv);
     // blackjack w;
@@ -614,8 +632,8 @@ int main(int argc, const char * argv[]) {
             cout<< "1. Blackjack" << endl;
             cout<< "2. Go fish" << endl;
             cout<< "3. Slots" << endl;
-            cout<< "4. Roulette" << endl;
-            cout<< "5. Yahtzee" << endl;
+            cout<< "4. Yahtzee" << endl;
+            cout<< "5. Roulette " << endl;
             cout<< "6. Old maid" << endl;
             cout<< "7. Main menu" << endl;
             cin >> gameOption;
@@ -699,7 +717,7 @@ int main(int argc, const char * argv[]) {
                 int yahtzeeMenu = 0;
                 cout << "Lets play some Yahtzee!" << endl;
                 cout << "1. View rules" << endl;
-                cout << "2. Play Slots" << endl;
+                cout << "2. Play Yahtzee" << endl;
                 cout << "3. Go to main menu" << endl;
                 cin >> yahtzeeMenu;
                 if(yahtzeeMenu == 1)
@@ -726,13 +744,679 @@ int main(int argc, const char * argv[]) {
                 cin >> rouletteMenu;
                 if(rouletteMenu == 1)
                 {
-                    //Displays the rules for go fish
-                    
+                    //Displays the rules for roulette
+                    printRulesRoulette();
                 }
                 else if (rouletteMenu == 2)
                 {
                     //play the game
-                }
+                    
+                    printMenuRoulette();
+                    int rouletteOption = 0;
+                    cin >> rouletteOption;
+                    if(rouletteOption == 1)
+                    {
+                        int playerMoney = 1000;
+                        string playerColor = "";
+                        int randomNumber = 0;
+                        int moneyWagered = 0;
+                        cout << "What color do you want to bet on: red or black?" << endl;
+                        cin >> playerColor;
+                        while(playerMoney > 0)
+                        {
+                            srand( static_cast<unsigned int>(time(NULL)));
+                            randomNumber = rand() % 37;
+                            cout << "How much would you like to bet?" << endl;
+                            cout << "Your money: $"<< playerMoney << endl;
+                            cin >> moneyWagered;
+                            playerMoney = playerMoney-moneyWagered;
+                            if(playerColor == "red" && (randomNumber == 1 || randomNumber == 3 || randomNumber == 5 || randomNumber == 7 || randomNumber == 9 || randomNumber == 12 || randomNumber == 14 || randomNumber == 16 || randomNumber == 18 || randomNumber == 3 || randomNumber == 19 || randomNumber == 21 || randomNumber == 23 || randomNumber == 25 || randomNumber == 27 || randomNumber == 30 ))
+                                {
+                                    playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                                    cout << "Number is: " << randomNumber << " it's red" << endl;
+                                    cout << "Your Color: " << playerColor << endl;
+                                    cout<< "You won: $" << moneyWagered << endl;
+                                }
+                                else if (playerColor == "black")
+                                {
+                                    
+                                }
+                        }
+                        cout<< "You lost all money" << endl;
+                    }
+                    else if(rouletteOption == 2)
+                    {
+                        
+                    }
+                    else if(rouletteOption == 3)
+                    {
+                        int playerMoney = 1000;
+                        string playerChoiceNumber = "";
+                        int randomNumber = 0;
+                        int moneyWagered = 0;
+                        while(playerMoney > 0)
+                        {
+                            srand( static_cast<unsigned int>(time(NULL)));
+                            randomNumber = rand() % 37;
+                            cout << "What number would you like to bet on?" << endl;
+                            cin >> playerChoiceNumber;
+                            if((stoi(playerChoiceNumber) >= 0 && stoi(playerChoiceNumber) <= 36) || playerChoiceNumber == "00")
+                            {
+                                cout << "How much would you like to bet?" << endl;
+                                cout << "Your money: $"<< playerMoney << endl;
+                                cin >> moneyWagered;
+                                playerMoney = playerMoney - moneyWagered;
+                                if(randomNumber == 0)
+                                {
+                                    cout << "The number is: 0" << endl;
+                                    if (playerChoiceNumber == "0")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 1)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "1")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 2)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "2")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 3)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "3")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 4)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "4")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 5)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "5")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 6)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "6")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 7)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "7")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 8)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "8")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 9)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "9")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 10)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "10")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 11)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "11")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 12)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "12")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 13)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "13")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 14)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "14")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 15)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "15")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 16)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "16")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 17)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "17")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 18)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "18")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 19)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "19")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 20)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "20")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 21)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "21")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 22)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "22")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 23)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "23")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 24)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "24")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 25)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "25")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 26)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "26")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 27)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "27")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 28)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "28")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 29)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "29")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 30)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "30")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 31)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "31")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 32)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "32")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 33)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "33")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 34)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "34")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 35)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "35")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 36)
+                                {
+                                    cout << "The number is: " << randomNumber << endl;
+                                    if (playerChoiceNumber == "36")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                                else if(randomNumber == 37)
+                                {
+                                    cout << "The number is: 00" << endl;
+                                    if (playerChoiceNumber == "00")
+                                    {
+                                        moneyWagered = moneyWagered*35 + moneyWagered;
+                                        playerMoney = playerMoney + moneyWagered;
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You won: $" << moneyWagered << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << "Your number: " << playerChoiceNumber << endl;
+                                        cout << "You lost: $" << moneyWagered << endl;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 else if (rouletteMenu == 3)
                 {
                     option = 1;
@@ -778,5 +1462,6 @@ int main(int argc, const char * argv[]) {
             exit(0);
         }
     }
+  }
 }
 
