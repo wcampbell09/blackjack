@@ -310,7 +310,7 @@ int checkCard (string card)
     return cardValue;
 }
 
-//initialize card hand
+//initialize card hand, sets the hands to null to start the game.
 void initializeHand (string hand[])
 {
     
@@ -334,25 +334,23 @@ bool isInt(int n)
     }
     return true;
 }
-
-//added by emily. plays the game, sort of, i think??
+//plays the game of blackjack
 void blackJack (string deck [], string &dealer)
 {
-    //still need to incorporate gambling. still need to check that i did this right based off of the rules
-    
-    
+    //creates an array of strings with 52 elements for each the player and the computer
     string playerHand[52];//array for players hand
-    string compHand[52];
+    string compHand[52];//array for the computers hand
     
     int playerCard=0;//first player card in hand
     int playerFinal =0;//sum of cards from player
     
-    
     int i = 52;//value of number of cards in deck is used to check how many cards are left in pile throughout the game
+                //i is decremented each time a card is dealt, when i reaches 20, the deck will reset and shuffle for
+                //the game to continue. 
     
-    int round=1;
-    
-    int playerValue = 1000;
+    int round=1;//the round for the game starts at one and increments for each new round. is displayed throughout the game.
+ 
+    int playerValue = 1000;//amount of "money" the player is given to start gambling with 
     
     
     while ((i > 3) && playerValue > 0)
