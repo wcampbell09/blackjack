@@ -246,7 +246,7 @@ void hit (string deck[], string hand [])
 //saves who the dealer is in a string, either player or computer based on if player says yes or no.
 string getDealer (string option, string dealer)
 {
-    cout << "Deal Yes or No?" << endl;
+    cout << "Would you like to be the dealer: Yes or No?" << endl;
     cin >> option ;
     
     if (option == "Yes")
@@ -465,7 +465,7 @@ void blackJack (string deck [], string dealer)
                 playerFinal=playerFinal+playerCard;
                 j++;
                 
-                cout << "your move: " << playerFinal<< endl;
+                cout << "Your hand value: " << playerFinal<< endl;
             }
             //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
             else if (move == "Stay")
@@ -483,7 +483,7 @@ void blackJack (string deck [], string dealer)
                     playerFinal=playerFinal+playerCard;
                     n++;
                 }
-                cout << "Your move: " << playerFinal<< endl;
+                cout << "Your hand value: " << playerFinal<< endl;
             }
         }
         
