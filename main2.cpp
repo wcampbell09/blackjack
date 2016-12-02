@@ -222,9 +222,9 @@ void hit (string deck[], string hand [])
     deck [i]= "empty";
 }
 //saves who the dealer is in a string, either player or computer based on if player says yes or no.
-void getDealer (string option, string dealer)
+void getDealer (string option, string &dealer)
 {
-    cout << "Deal Yes or No?" << endl;
+    cout << "Do you want to play as dealer: Yes or No?" << endl;
     cin >> option ;
     
     if (option == "yes")
@@ -310,7 +310,7 @@ bool isInt(int n)
 }
 
 //added by emily. plays the game, sort of, i think??
-void game (string deck [], string dealer)
+void blackJack (string deck [], string &dealer)
 {
     //still need to incorporate gambling. still need to check that i did this right based off of the rules
     
@@ -326,9 +326,7 @@ void game (string deck [], string dealer)
     
     int round=1;
     
-    int playerValue = 0;
-    cout<< "How much money would you like to gamble?" << endl;
-    cin>> playerValue;
+    int playerValue = 1000;
     
     
     while (i > 3)
@@ -336,7 +334,7 @@ void game (string deck [], string dealer)
         string move="Hit";//determines whether player wants to hit or stay
         initializeHand(playerHand);
         initializeHand(compHand);
-        
+       
         playerFinal=0;
         int compFinal=0;
         
@@ -354,29 +352,43 @@ void game (string deck [], string dealer)
         //
         //
         //DOES NOT WORK FOR AN INVALID INPUT... NEED TO FIX
+        cout<< "How much would you like to wager?" << endl;
+        cout<< "Your money: $" << playerValue << endl;
+        cin >> n;
+        cin.clear();
+        cin.ignore(1000,'\n');
         while(true)
         {
-            cout<< "How much would you like to wager?" << endl;
-            cin>> n;
-            if(n <= playerValue)
+            if(n==0)
             {
-                if(isInt(n))
-                {
-                    cout<< "Please enter an integer value." << endl;
-                }
-                else
-                {
-                    playerValue -= n;
-                    break;
-                }
+                cout<< "Please enter an integer value." << endl;
+                cin >> n;
+                cin.clear();
+                cin.ignore(1000,'\n');
+            }
+            else if(n <= playerValue)
+            {
+                playerValue -= n;
+                break;
             }
             else
             {
                 cout<< "You cannot wager more than you have." << endl;
+                cout<< "Please enter a smaller value." << endl;
+                cin >> n;
+                cin.clear();
+                cin.ignore(1000,'\n');
             }
         }
         
-        
+        if (dealer == "player")
+        {
+            cout<< "Computer's hand is: " << compHand[0] << " " << compHand[1]<<endl;
+        }
+        else
+        {
+            cout<< "Computer's hand is: " << compHand[0]<<endl;
+        }
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
         int j=0;
         while (playerHand[j]!= "" && j<=51)
@@ -386,25 +398,24 @@ void game (string deck [], string dealer)
             
             if (playerCard==11)
             {
-                cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                 cin >> playerCard;
             }
             
             playerFinal=playerFinal+playerCard;
             j++;
         }
-        cout << "your move: " << playerFinal<< endl;
-        
-        while (move=="Hit" && playerFinal<=21)
-        {
+        cout << "Your hand value: " << playerFinal<< endl;
+       
             if (playerFinal==21)
             {
+                cout << "Your hand value: " << playerFinal<< endl;
                 break;
             }
-            
+            else {
             cout << "Hit or Stay" << endl;
             cin>> move;
-            
+            }
             //STUCK IN INFINITE FOR LOOP...  This is suppose to check if it is Hit or Stay
             //while(move.compare("Hit")!=0 || move.compare("Stay")!=0)
             // {
@@ -414,54 +425,52 @@ void game (string deck [], string dealer)
             //  }
             //if player wants to hit, subtracts from i (the card pile) checks values of cards and sums them.
             //if any cards are an ace the player is asked what value they would like it to hold.
-            if (move == "Stay"){
+            if (move == "Stay" || move == "stay"){
                 break;
             }
-            if (move == "Hit" )
+            if (move == "Hit" || "hit" )
             {
-                hit (deck, playerHand);
-                i --;
-                int j=0;
+                while (move == "Hit" || "hit"){
+                    hit (deck, playerHand);
+                    i --;
+                    int j=0;
                 
-                while (playerHand[j]!= "" && j<=51)
-                {
-                    j++;
-                }
-                cout << playerHand [j-1]<< endl ;
+                    while (playerHand[j]!= "" && j<=51)
+                    {
+                        j++;
+                    }
+                    cout << playerHand [j-1]<< endl ;
                 
-                playerCard=checkCard(playerHand[j-1]);
-                
-                if (playerCard==11)
-                {
-                    cout << "would you like your ace to be worth 1 or 11?"<< endl;
-                    cin >> playerCard;
-                }
-                
-                playerFinal=playerFinal+playerCard;
-                j++;
-                
-                cout << "your move: " << playerFinal<< endl;
-            }
-            //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
-            else if (move == "Stay")
-            {
-                n=0;
-                int playerFinal=0;
-                while (playerHand[n]!= "" && n<=51)
-                {
-                    playerCard=checkCard(playerHand[n]);
+                    playerCard=checkCard(playerHand[j-1]);
+                    
                     if (playerCard==11)
                     {
-                        cout << "would you like your ace to be worth 1 or 11?"<< endl;
+                        cout << "Would you like your ace to be worth 1 or 11?"<< endl;
                         cin >> playerCard;
                     }
+                
                     playerFinal=playerFinal+playerCard;
-                    n++;
+                    j++;
+                    if(playerFinal > 21)
+                    {
+                        cout << "You went over 21" << endl;
+                        break;
+                    }
+                    cout << "Your hand value: " << playerFinal<< endl;
+                    cout << "Hit or Stay?"<<endl;
+                    cin>> move;
+                    if (move == "Stay" || move == "stay")
+                    {
+                        cout << "Your hand value: " << playerFinal<< endl;
+                        break;
+                    }
                 }
-                cout << "your move: " << playerFinal<< endl;
             }
-        }
+            //if player wants to stay, card values are checked (if any are A then they are asked 1 or 11). card values are summed.
+
         
+
+
         //the following is for the computer. checks the card values dealt. if any are A's then decides to make 1 or 11 based on
         //value of other card. if the sum of cards is less than 17, then the computer will hit. if it is more than it will stay.
         
@@ -499,7 +508,7 @@ void game (string deck [], string dealer)
             
         }
         cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player their hand
-        cout << "computer move: " << compFinal<< endl;
+        cout << "Computer move: " << compFinal<< endl;
         m=2;
         
         while (compFinal<17)
@@ -531,26 +540,26 @@ void game (string deck [], string dealer)
             
             m++;
             
-            cout << "computer move: "<< compFinal<< endl;
+            cout << "Computer move: "<< compFinal<< endl;
             
         }
         
         //checks to see if comp or player won the round
         if (playerFinal > 21)
         {
-            cout << "you loose, over 21"<<endl;
+            cout << "You lose, your hand is over 21"<<endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > playerFinal && compFinal <=21)
         {
-            cout << "you loose, computer wins"<< endl;
+            cout << "You lose, computer wins"<< endl;
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
         else if (compFinal > 21 && playerFinal <= 21)
         {
-            cout << "You win. Computer over 21"<< endl;
+            cout << "You win. Computer hand is over 21"<< endl;
             playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
@@ -564,13 +573,13 @@ void game (string deck [], string dealer)
         else {
             if (dealer == "player" )
             {
-                cout << "you win the tie"<< endl;
+                cout << "You win the tie"<< endl;
                 playerValue += 2*n;
                 cout<< "You have $"  << playerValue << endl;
             }
             else
             {
-                cout << "computer wins the tie"<< endl;
+                cout << "Computer wins the tie"<< endl;
                 cout<< "You have $"  << playerValue << endl;
             }
         }
@@ -629,7 +638,7 @@ int main(int argc, const char * argv[]) {
                     //play the game
                     string option="";
                     string dealer = "";
-                    dealer = getDealer(option, dealer);
+                    getDealer(option, dealer);
                     string* deck = initializeDeck();
                     shuffleDeck (deck);
                     blackJack (deck, dealer);
@@ -757,16 +766,16 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-    
-    else if (option == 2){
-        //Who made the games, about betting casino stuff
         
-    }
-    
-    else if (option == 3){
+        else if (option == 2){
+            //Who made the games, about betting casino stuff
+            
+        }
         
-        cout << "Thanks for playing!" << endl;
-        exit(0);
+        else if (option == 3){
+            
+            cout << "Thanks for playing!" << endl;
+            exit(0);
         }
     }
 }
