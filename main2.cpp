@@ -167,7 +167,7 @@ string* initializeDeck()
 
 void displayDeck(string deck[])
 {
-    for (int i=0; i<=52; i++)
+    for (int i=0; i<52; i++)
     {
         cout << deck[i] << endl;
     }
