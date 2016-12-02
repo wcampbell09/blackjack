@@ -192,7 +192,9 @@ void shuffleDeck(string deck[])
     string hold;
     for (int i = 0; i <52; i++)
     {
-        srand( static_cast<unsigned int>(time(NULL)));
+        mt19937 rng (std::random_device{}());
+        uniform_int_distribution<> dist (0, 51);
+
         //r becomes a random integerin the range 0 to 52
         r = rand() % 52 ;
         hold = deck[i];
