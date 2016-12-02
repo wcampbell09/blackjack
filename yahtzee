@@ -1,0 +1,278 @@
+//
+//  yahtzee
+//
+
+#include <iostream>
+#include <string>
+#include <ctime>
+
+using namespace std;
+
+void displaydice(int array[]){
+    cout<< "Dice Face Numbers: " << endl;
+    for (int k=0; k<5; k++){
+        cout << array[k] << " ";
+    }
+    cout<<endl;
+}
+
+int* sortarray(int array[]){
+    int temp=0;
+    for (int j=0; j<6; j++){
+        for (int i=0; i<4; i++){
+            if (array[i]<array[i+1]){
+                temp = array[i+1];
+                array[i+1]=array[i];
+                array[i] = temp;
+            }
+        }
+    }
+    return array;
+}
+
+
+int* RemoveDice(int array[], int facenum){
+    for (int i=0; i<5; i++){
+        if(array[i]==facenum){
+            array[i]=0;
+        }
+    }
+    sortarray(array);
+    return array;
+}
+
+
+int* game(int randarray[]){
+    string Roll="";
+    string choice = "";
+    srand((unsigned)time(NULL));
+    
+    int diceToRoll = 0;
+    int rerollnum = 0;
+    int counter = 5;
+    
+    
+    for (int i=0; i<=2; i++){
+        cout << "Would you like to roll the dice? Please enter Yes or No?" << endl;
+        cin >> Roll;
+        if (Roll=="No"){
+            break;
+        }
+        
+        for (int j=(diceToRoll); j<=4; j++)
+        {
+            int randomnum;
+            randomnum = (rand() % 6 + 1);
+            randarray[j] = randomnum;
+        }
+        
+        displaydice(randarray);
+        
+        counter=5;
+        while (counter>0){
+            cout << "Are there any dice you would like to re-roll? Please enter Yes or No?" <<endl;
+            cin >> choice;
+            if (choice=="No"){
+                
+                for (int k=0; k<5; k++){
+                    if (randarray[k]==0){
+                        counter--;
+                    }
+                }
+                
+                diceToRoll=counter;
+                break;
+                
+            }
+            cout << "Enter the number that is on the dice face for one of the die you want to get rid of." <<endl;
+            cin >> rerollnum;
+            
+            RemoveDice(randarray,rerollnum);
+            
+            displaydice(randarray);
+            
+            
+        }
+        
+    }
+    sortarray(randarray);
+    return randarray;
+}
+
+
+int AddingAce(int array[]){
+    //Adding the Aces
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==1){
+            sum = sum+1;
+        }
+    }
+    return sum;
+}
+
+
+int AddingTwos(int array[]){
+    //Adding the Twos
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==2){
+            sum = sum+2;
+        }
+    }
+    return sum;
+}
+
+
+int AddingThrees(int array[]){
+    //Adding the threes
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==3){
+            sum = sum+3;
+        }
+    }
+    return sum;
+}
+
+
+int AddingFours(int array[]){
+    //Adding the fours
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==4){
+            sum = sum+4;
+        }
+    }
+    return sum;
+}
+
+
+int AddingFives(int array[]){
+    //Adding the fives
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==5){
+            sum = sum+5;
+        }
+    }
+    return sum;
+}
+
+
+int AddingSixes(int array[]){
+    //Adding the sixes
+    int sum = 0;
+    for ( int i=0; i<5; i++){
+        if (array[i]==6){
+            sum = sum+6;
+        }
+    }
+    return sum;
+}
+
+
+int ThreeOfAKind(int array[]){
+    //Checking for 3 of a kind
+    int value=0;
+    for (int i=0; i<3;i++){
+        if (array[i]==array[i+1] && array[i+1]==array[i+2]){
+            value = array[i];
+            return value;
+        }
+        
+    }
+    return value;
+}
+
+int FourOfAKind(int array[]){
+    //Checking for 4 of a kind
+    int value=0;
+    for (int i=0; i<2;i++){
+        if (array[i]==array[i+1] && array[i+1]==array[i+2] && array[i+2]==array[i+3]){
+            value = array[i];
+            return value;
+        }
+        
+    }
+    return value;
+}
+
+int FullHouse(int array[]){
+    //Checking for FullHouse
+    if (array[0]==array[1] && array[1]==array[2] && array[3]==array[4]){
+        return 25;
+    }
+    if (array[0]==array[1] && array[2]==array[3] && array[3]==array[4]){
+        return 25;
+    }
+    return 0;
+}
+
+int SmallStraight(int array[]){
+    if ((array[0]==5  && array[1]==4 && array[2]==3 && array[3]==2) || (array[1]==5  && array[2]==4 && array[3]==3 && array[4]==2)){
+        return 30;
+    }
+    if ((array[0]==4  && array[1]==3 && array[2]==2 && array[3]==1) || (array[1]==4  && array[2]==3 && array[3]==2 && array[4]==1)){
+        return 30;
+    }
+    return 0;
+}
+
+int LargeStraight(int array[]){
+    if (array[0]==5  && array[1]==4  && array[2]==3  && array[3]==2  && array[4]==1){
+        return 40;
+    }
+    return 0;
+}
+
+int Yahtzee(int array[]){
+    if (array[0]==array[1] && array[1]==array[2] && array[2]==array[3] && array[3]==array[4] ){
+        return 50;
+    }
+    return 0;
+}
+
+int Chance(int array[]){
+    int sum = 0;
+    for (int i=0; i<5; i++){
+        sum = sum + array[i];
+    }
+    return sum;
+}
+
+int * ScoreCalculator(int array[], int scorearray[]){
+    
+    scorearray[0] = AddingAce(array);
+    scorearray[1] = AddingTwos(array);
+    scorearray[2] = AddingThrees(array);
+    scorearray[3] = AddingFours(array);
+    scorearray[4] = AddingFives(array);
+    scorearray[5] = AddingSixes(array);
+    scorearray[6] = ThreeOfAKind(array);
+    scorearray[7] = FourOfAKind(array);
+    scorearray[8] = FullHouse(array);
+    scorearray[9] = SmallStraight(array);
+    scorearray[10] = LargeStraight(array);
+    scorearray[11] = Yahtzee(array);
+    scorearray[12] = Chance(array);
+    
+    
+    return scorearray;
+}
+
+
+
+
+
+
+int main() {
+    int randarray[5];
+    int ScoreTracker[13];
+    game(randarray);
+    ScoreCalculator(randarray,ScoreTracker);
+    
+
+    
+    
+    }
