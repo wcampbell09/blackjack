@@ -1156,6 +1156,284 @@ void printMenuRoulette()
     cout<< "3. Bet on a single number" << endl;
 }
 
+string* initializeDeckOM()
+{
+    string* deck = new string [53];
+    string cardNum = "";
+    for(int j = 0; j < 2; j++)
+    {
+	    for (int i = 0; i<=12; i++)
+	    {
+	        if (i == 9)
+	        {
+	            cardNum = "J";
+	        }
+	        else if (i == 10)
+	        {
+	            cardNum = "Q";
+	        }
+	        else if (i == 11 )
+	        {
+	            cardNum = "K";
+	        }
+	        else if (i == 12)
+	        {
+	            cardNum = "A";
+	        }
+	        else
+	        {
+	            cardNum = to_string(i+2);
+	        }
+	        deck[i + j*13]= cardNum + "BLACK";
+	    }
+	}
+    
+    for(int j = 0; j < 2; j++)
+	{
+	    for (int i = 0; i<=12; i++)
+	    {
+	        if (i == 9)
+	        {
+	            cardNum = "J";
+	        }
+	        else if (i == 10)
+	        {
+	            cardNum = "Q";
+	            
+	        }
+	        else if (i == 11 )
+	        {
+	            cardNum = "K";
+	            
+	        }
+	        else if (i == 12)
+	        {
+	            cardNum = "A";
+	        }
+	        else
+	        {
+	            cardNum = to_string(i+2);
+	        }
+	        deck[i+26 + j*13]= cardNum + "RED";
+	    }
+    }
+    deck[52] = "JOKER";
+    return deck;
+}
+
+void shuffleDeckOM(string deck[], int length)
+{
+    int r =0;
+    string hold;
+    for (int i = 0; i<length; i++)
+    {
+        r = rand() % length;
+        hold = deck[i];
+        deck [i] = deck [r];
+        deck [r] = hold;
+        hold = "";
+    }
+}
+
+class PlayerOM   //Create Node Class
+{
+	 public:
+	 	//instance variables
+		string *hand;
+		int length;		//length of hand array
+		int cards;		//non-empty cards
+		
+		//constructor
+		PlayerOM(string* a, int totalCards);
+		
+		//methods
+		void numCardsOM();
+		void checkDuplicatesOM();
+		void displayDeckOM();
+		int indexFinderOM(int index);
+};
+ 
+//This is a constructor
+PlayerOM::PlayerOM(string* a, int totalCards)
+{
+	hand = a;
+	length = totalCards;		//length of hand array
+	cards = 0;
+	checkDuplicatesOM();
+}
+
+void PlayerOM::displayDeckOM()
+{
+    for(int i=0; i<length; i++)
+    {
+        cout << hand[i] << endl;
+    }
+}
+
+//This will count the number of cards in the player's hand that are not empty.
+void PlayerOM::numCardsOM()
+{
+	cards = 0;
+	int i;
+	for(i = 0; i < length; i++)
+	{
+		if(hand[i] != "empty")
+		{
+			cards++;
+		}
+	}
+}
+
+void PlayerOM::checkDuplicatesOM()
+{
+    //If a pair is found, they will both be set to empty and i will decrease by 2.
+    int num = 0;
+    int counter;
+    while(num < length)
+    {
+        if(hand[num].compare("empty") != 0)
+        {
+            counter = num+1;
+            while(counter < length)
+            {
+                if((hand[num]).compare(hand[counter]) == 0)
+                {
+                    hand[num] = "empty";
+                    hand[counter] = "empty";
+                    break;
+                }
+                counter++;
+            }
+        }
+        num++;
+    }
+    numCardsOM();
+}
+
+int PlayerOM::indexFinderOM(int index)
+{
+	int j = 0;		//j is the value that should be greater than index
+	int i;
+	for(i = 0; i < length; i++)		//loops through the hand array
+	{
+		if(!(hand[i].compare("empty") == 0))
+		{
+			j++;
+			if(j==index)
+			{
+				return i;
+			}
+		}
+	}
+	return length;
+}
+
+int potentialWinnerOM(PlayerOM** a, int length)	//true is there is a winner. False otherwise
+{
+	for(int i = 0; i < length; i++)
+	{
+		if(a[i]->cards == 0)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void oldMaid()
+{
+    string * deck = initializeDeckOM();
+     //There are 53 cards instead of 52, because the 53rd card is the joker
+    //making the arrays for each player by splitting the deck array
+	shuffleDeckOM(deck, 53);
+	
+	int players = 0;
+	while(players < 2 || players > 6)		//only playing with 2, 3, 4 or 5 players
+	{
+		cout<< "How many people would you like to be in this game?" << endl;
+		cin>> players;
+		
+		if(players < 2)
+		{
+			cout<< "You cannot play with only 1 person." << endl;
+		}
+		else if(players > 6)
+		{
+			cout<< "You cannot have more than 5 people." << endl;
+		}
+	}
+	
+	int cards = 53/players;
+	int extra = 53%players;
+	int num = 0; //If this goes over 52, things will get bad. Index of deck.
+	PlayerOM** people = new PlayerOM* [players];
+	for(int i = 0; i < players; i++)
+	{
+		if(i < extra)
+		{
+			//creates the array for this player
+			string* a = new string[cards+1];
+			for(int j = 0; j < cards+1; j++)
+			{
+				a[j] = deck[num];
+				num++;
+			}
+			people[i] = new PlayerOM(a, cards + 1);
+		}
+		else
+		{
+			//creates the array for this player
+			string* a = new string[cards];
+			for(int j = 0; j < cards; j++)
+			{
+				a[j] = deck[num];
+				num++;
+			}
+			people[i] = new PlayerOM(a, cards);
+		}	
+	}
+	
+	//This is where the actual game starts.
+	int i = 0;
+	while(potentialWinnerOM(people, players) == -1)
+	{
+		cout<< "\nPlayer " << i + 1 << ": It is your turn." << endl;
+		cout<< "Choose a number between 1 and " << people[(i+1)%players]->cards << endl;
+		int choice = -1;
+		cin>> choice;
+		while(choice < 1 || choice > people[(i+1)%players]->cards)
+		{
+			cout<< "Please choose a number within the valid range." << endl;
+			cin>> choice;
+		}
+		
+		choice = people[(i+1)%players]->indexFinderOM(choice);
+		//Now that we have the index, put that item into people[i]'s hand.
+		
+		string a = people[(i+1)%players]->hand[choice];
+		people[(i+1)%players]->hand[choice] = "empty";
+		//recalculate numCards
+		people[(i+1)%players]->numCardsOM();
+		
+		//find an empty spot in people[i]'s hand and place it there
+		int u = 0;
+		while(people[i]->hand[u] != "empty")
+		{
+			u++;
+		}
+		people[i]->hand[u] = a;
+		if(a == "JOKER")
+		{
+			cout<< "Player " << i +1 << ": You have the JOKER!" << endl;
+		}
+		people[i]->checkDuplicatesOM();
+		shuffleDeckOM(people[i]->hand, people[i]->length);
+		i++;
+		i = i%players;
+	}
+	cout<< "Player " << potentialWinnerOM(people, players) + 1 << " is the winner!";
+}
+
 int main(int argc, const char * argv[]) {
     // QApplication a(argc, argv);
     // blackjack w;
@@ -2061,12 +2339,12 @@ int main(int argc, const char * argv[]) {
                 cin >> oldMaidMenu;
                 if(oldMaidMenu == 1)
                 {
-                    //Displays the rules for go fish
+                    oldMaidRules();
                     
                 }
                 else if (oldMaidMenu == 2)
                 {
-                    //play the game
+                    oldMaid();
                 }
                 else if (oldMaidMenu == 3)
                 {
