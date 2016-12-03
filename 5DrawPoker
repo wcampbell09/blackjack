@@ -1,0 +1,373 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std; 
+
+string* initializeDeck()
+
+{
+	string* deck = new string[52];
+	string cardNum = "";
+
+	for (int i = 0; i <= 12; i++)
+	{
+		if (i == 9)
+		{
+			cardNum = "J";
+		}
+		else if (i == 10)
+		{
+			cardNum = "Q";
+		}
+		else if (i == 11)
+		{
+			cardNum = "K";
+		}
+		else if (i == 12)
+		{
+			cardNum = "A";
+		}
+		else
+		{
+			cardNum = to_string(i + 2);
+		}
+		deck[i] = cardNum + "S";
+
+	}
+
+	for (int i = 0; i <= 12; i++)
+	{
+		if (i == 9)
+		{
+			cardNum = "J";
+		}
+		else if (i == 10)
+		{
+			cardNum = "Q";
+
+		}
+		else if (i == 11)
+		{
+			cardNum = "K";
+
+		}
+		else if (i == 12)
+		{
+			cardNum = "A";
+		}
+		else
+		{
+			cardNum = to_string(i + 2);
+		}
+		deck[i + 13] = cardNum + "D";
+
+	}
+
+	for (int i = 0; i <= 12; i++)
+	{
+		if (i == 9)
+		{
+			cardNum = "J";
+		}
+		else if (i == 10)
+		{
+			cardNum = "Q";
+
+		}
+		else if (i == 11)
+		{
+			cardNum = "K";
+
+		}
+		else if (i == 12)
+		{
+			cardNum = "A";
+		}
+		else
+		{
+			cardNum = to_string(i + 2);
+		}
+		deck[i + 26] = cardNum + "C";
+
+	}
+
+	for (int i = 0; i <= 12; i++)
+	{
+		if (i == 9)
+		{
+			cardNum = "J";
+		}
+		else if (i == 10)
+		{
+			cardNum = "Q";
+
+		}
+		else if (i == 11)
+		{
+			cardNum = "K";
+
+		}
+		else if (i == 12)
+		{
+			cardNum = "A";
+		}
+		else
+		{
+			cardNum = to_string(i + 2);
+		}
+		deck[i + 39] = cardNum + "H";
+
+	}
+	return deck;
+}
+void shuffleDeck(string deck[])
+{
+	int r = 0;
+	string hold;
+	for (int i = 0; i < 52; i++)
+	{
+
+		r = rand() % 52;
+		
+		hold = deck[i];
+		deck[i] = deck[r];
+		deck[r] = hold;
+		hold = "";
+	}
+}
+
+
+void deal(string deck[], string hand[])
+{
+	int i = 0;
+	while (deck[i] == "empty" && i<52)
+	{
+		i++;
+	}
+	hand[0] = deck[i];
+	deck[i] = "empty";
+	hand[1] = deck[i+1];
+	deck[i+1] = "empty";
+	hand[2] = deck[i+2];
+	deck[i+2] = "empty";
+	hand[3] = deck[i+3];
+	deck[i+3] = "empty";
+	hand[4] = deck[i+4];
+	deck[i+4] = "empty";
+
+}
+void displayDeck(string deck[])
+{
+	for (int i = 0; i < 52; i++)
+	{
+		cout << deck[i] << endl;
+	}
+}
+void displayHand(string hand[]) {
+	for (int i = 0; i < 5; i++)
+	{
+		cout << hand[i] << endl;
+	}
+}
+void swapCards(string deck[], string hand[], string card) {
+	int i = 0; 
+	int k = 0; 
+	string n = ""; 
+	while (deck[i] == "empty" && i<52)
+	{
+		i++;
+	}
+	for (int i = 0; i < 5; i++) {
+		if (hand[i] == card) {
+			n = card; 
+			k = i; 
+		}
+	}
+	hand[k] = deck[i];
+	deck[i] = "empty";
+
+}
+void compChoice(string hand[]) {
+
+}
+
+bool cardExist(string hand[], string card) {
+	bool boo = false; 
+	for (int i = 0; i < 5; i++) {
+		if (hand[i] == card) {
+			boo = true;
+		}
+	}
+	return boo; 
+}
+
+int getScore(string hand[]) {
+	int matches = 0;
+	int score = 0; 
+	bool flush = false; 
+	bool fullHouse = false; 
+	bool fourKind = false; 
+	
+
+	/*if (hand[0].substr(1) == hand[1].substr(1) && hand[0].substr(1) == hand[2].substr(1) && hand[0].substr(1) == hand[3].substr(1) && hand[0].substr(1) == hand[4].substr(1)) {
+		flush = true;
+		score += 5; 
+	}
+	*/
+
+	for (int i = 0; i < 5; i++) {
+		for(int j = 0; j<5; j++){
+			if (hand[i].substr(0) == hand[j].substr(0)) {
+				++matches; 
+			}
+		}
+
+	}
+	//2 of a kind
+	if (matches == 6 && flush == false) {
+		score += 1;
+	}
+	//2 pair 
+	else if (matches == 9 && flush ==false) {
+		score += 2;
+	}
+	//3 of a kind
+	else if (matches == 11 && flush ==false) {
+		score += 3;
+	}
+	//full house
+	else if (matches == 13 && flush == true) {
+		score +=1;
+	}
+	else if (matches == 13 && flush == false) {
+		score += 6;
+	}
+	// 4 of a kind
+	else if (matches == 17 && flush ==true) {
+		score += 2;
+	}
+	else if (matches == 17 && flush == false) {
+		score += 7; 
+	}
+	return score; 
+}
+
+int highCard(string hand[]) {
+	int high = 0; 
+	bool ace = false; 
+	bool king = false; 
+	bool queen = false;
+	bool jack = false; 
+	for (int i = 0; i < 5; i++) {
+		if (hand[i].substr(0) == "A") {
+			ace = true; 
+		}
+		else if (hand[i].substr(0) == "K") {
+			king = true; 
+		}
+		else if (hand[i].substr(0) == "Q") {
+			queen = true;
+		}
+		else if (hand[i].substr(0) == "J") {
+			jack = true; 
+		}
+	}
+	int value = 0; 
+	string str = "";
+	if (ace == false && king == false && queen == false && jack == false) {
+		for (int i = 0; i < 5; i++) {
+			str = hand[i].substr(0);
+			value =atoi(str.c_str());
+			if (value > high ) {
+				high = value;
+			}
+		}
+	}
+	if (ace == true) {
+		return 14; 
+	}
+	else if (king == true && ace == false) {
+		return 13; 
+	}
+	else if (queen == true && king == false && ace == false) {
+		return 12; 
+	}
+	else if (jack == true && queen == false && king == false && ace == false) {
+		return 11;
+	}
+	else {
+		return high;
+	}
+}
+
+
+int main() {
+	string* deck = initializeDeck();
+	
+	shuffleDeck(deck);
+	
+
+	string compHand[5];
+	string userHand[5];
+	string cardSwap = "";
+	int number = 0; 
+	
+	deal(deck, userHand);
+	deal(deck, compHand);
+	//displayHand(compHand);
+
+	//displayDeck(deck);
+	//cout << endl << endl << endl;
+	
+	displayHand(userHand);
+	cout << endl; 
+	cout << "How many Cards would you like to swap? (can be 0-3 cards) "  << endl;
+	cin >> number;
+	while (number != 0 && number != 1 && number != 2 && number != 3) {
+		cout << endl << "Invalid! Must be an integer between 0 and 3 " << endl;
+		cin >> number; 
+	}
+	for (int i = 1; i < number+1; i++) {
+		cout << "What is the card?" << endl; 
+		cin >> cardSwap; 
+		while (cardExist(userHand, cardSwap) == false) {
+			cout << endl << "Invalid! must be a card that is in your hand! What is the card? " << endl; 
+			cin >> cardSwap; 
+		}
+
+		swapCards(deck, userHand, cardSwap);
+		cardSwap = "";
+	}
+	cout << endl << "Here is your new hand" << endl; 
+	 displayHand(userHand);
+	cout << endl;
+
+	int userScore = getScore(userHand);
+	int compScore = getScore(compHand); 
+
+	if (userScore ==0 && compScore == 0) {
+		userScore = highCard(userHand);
+		compScore = highCard(compHand);
+	}
+	cout << "This was the computer's hand " << endl; 
+	displayHand(compHand);
+	cout << endl << endl << endl; 
+	cout << "This was your hand" << endl; 
+	displayHand(userHand);
+	cout << endl<<"user score " << userScore;
+	cout << endl << "comp score " << compScore;
+	
+	if (compScore > userScore) {
+		cout << "computer wins!";
+	}
+	else if (userScore > compScore) {
+		cout << "you win!";
+	}
+	else {
+		cout << "tie! split pot";
+	}
+
+
+	system("PAUSE");
+}
