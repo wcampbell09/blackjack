@@ -1339,6 +1339,22 @@ int potentialWinnerOM(PlayerOM** a, int length)	//true is there is a winner. Fal
 	}
 	return -1;
 }
+//This will display the rules of Old Maid.
+void oldMaidRules()
+{
+	cout<< "In this game, one joker has been added in addition to the normal 52" << endl;
+	cout<< "cards in a normal deck. Your objective is to not have that joker as" << endl;
+	cout<< "a part of your hand. If you do have the joker, attempt to get rid of" << endl;
+	cout<< "it as soon as you can! Whenever you have a pair, you can get rid of" << endl;
+	cout<< "those two cards. A pair is made when you have 2 cards that have the " << endl;
+	cout<< "same color and the same number. Suits do not matter. If you are the " << endl;
+	cout<< "first player to make pairs of all of the cards in your hand, you win!" << endl;
+	cout<< "You will gain a card each turn by choosing a card from the hand of" << endl;
+	cout<< "another player." << endl << endl;
+	cout<< "There is a minimum of 2 players in this game, and a maximum of 5. It" << endl;
+	cout<< "will last approximately 5-10 minutes, depending on the number of players." << endl << endl;
+	cout<< "Have fun and do not catch the Old Maid!" << endl;
+}
 
 void oldMaid()
 {
