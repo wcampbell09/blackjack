@@ -9,6 +9,509 @@
 #include <string>
 using namespace std;
 
+//This method displays the Dice Face Numbers.
+void displaydice(int array[])
+{
+    cout << endl<< "Dice Face Numbers: " << endl;
+    for (int k=0; k<5; k++)
+    {
+        cout << array[k] << " ";
+    }
+    cout<<endl <<endl;
+}
+
+//This method sorts the dice in order from largest at index 0 and smallest at index 4.
+int* sortarray(int array[])
+{
+    int temp=0;
+    for (int j=0; j<6; j++)
+    {
+        for (int i=0; i<4; i++)
+        {
+            //Checks if the value after the current index is larger. If it is the value is switched with the current index.
+            if (array[i]<array[i+1])
+            {
+                temp = array[i+1];
+                array[i+1]=array[i];
+                array[i] = temp;
+            }
+        }
+    }
+    return array;
+}
+
+//This method removes a dice from the roll and so that those dice can be re-rolled in the next round.
+int* RemoveDice(int array[], int facenum, int num)
+{
+    int counter = 0;
+    for (int i=0; i<5; i++)
+    {
+        //Checks if the dicenumber is in the array, if it is and has not already been removed then the dicenumber is removed from the array.
+        if(array[i]==facenum && counter!=num)
+        {
+            array[i]=0;
+            counter++;
+        }
+    }
+    sortarray(array);
+    return array;
+}
+
+//This is the method for the game.  It allows the player to roll 3 times and generate random rolls.
+int* game(int randarray[])
+{
+    string Roll="";
+    string choice = "";
+    srand((unsigned)time(NULL));
+    
+    int diceToRoll = 0;
+    int rerollnum = 0;
+    int counter = 5;
+    int Rerollnum = 0;
+    
+    //This is the loop for the three rounds in order to be able to re-roll twice.
+    for (int i=0; i<=2; i++)
+    {
+        cout << endl << "Would you like to roll the dice? Please enter Yes or No?" << endl;
+        cin >> Roll;
+        if (Roll=="No")
+        {
+            break;
+        }
+        
+        //This loop generates 5 random number from 1-6.
+        //These numbers are then stored in randarray.
+        for (int j=(diceToRoll); j<=4; j++)
+        {
+            int randomnum;
+            randomnum = (rand() % 6 + 1);
+            randarray[j] = randomnum;
+        }
+        
+        //Displays the dice
+        displaydice(randarray);
+        
+        //counter is to keep track of how many dice are taken out of the roll to be re-rolled.
+        counter=5;
+        //This loop checks if any dice need to be re-rolled.  If dice do need to be re-rolled, the number and frequency the die are asked.
+        while (counter>0)
+        {
+            if (i==2)
+            {
+                break;
+                break;
+            }
+            cout << "Are there any dice you would like to re-roll? Please enter Yes or No?" <<endl;
+            cin >> choice;
+            if (choice=="No")
+            {
+                //Adjusts counter if no.
+                for (int k=0; k<5; k++)
+                {
+                    if (randarray[k]==0)
+                    {
+                        counter--;
+                    }
+                }
+                
+                diceToRoll=counter;
+                break;
+                
+            }
+            cout << endl <<"Enter the number that is on the dice face for one of the die you want to get rid of." <<endl;
+            cin >> rerollnum;
+            cout << "How many die of that dice face number would you like to re-roll?" <<endl;
+            cin >> Rerollnum;
+            //Removes the dice from randarray
+            RemoveDice(randarray,rerollnum,Rerollnum);
+            
+            displaydice(randarray);
+        }
+        
+    }
+    //The array is sorted so that when the ScoreTracker is run the dice values will be organized and easier to handle.
+    sortarray(randarray);
+    return randarray;
+}
+
+//This method calculates the sum of the dice.
+int Chance(int array[])
+{
+    int sum = 0;
+    for (int i=0; i<5; i++)
+    {
+        sum = sum + array[i];
+    }
+    return sum;
+}
+
+//This method adds all the aces in the dice.  Then returns the sum of the aces.
+int AddingAce(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==1){
+            sum = sum+1;
+        }
+    }
+    return sum;
+}
+
+//This method adds all the twos in the dice.  Then returns the sum of the twos.
+int AddingTwos(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==2)
+        {
+            sum = sum+2;
+        }
+    }
+    return sum;
+}
+
+//This method adds all the threes in the dice.  Then returns the sum of the threes.
+int AddingThrees(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==3)
+        {
+            sum = sum+3;
+        }
+    }
+    return sum;
+}
+
+//This method adds all the fours in the dice.  Then returns the sum of the fours.
+int AddingFours(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==4)
+        {
+            sum = sum+4;
+        }
+    }
+    return sum;
+}
+
+//This method adds all the fives in the dice.  Then returns the sum of the fives.
+int AddingFives(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==5)
+        {
+            sum = sum+5;
+        }
+    }
+    return sum;
+}
+
+//This method adds all the sixes in the dice.  Then returns the sum of the sixes.
+int AddingSixes(int array[])
+{
+    int sum = 0;
+    for ( int i=0; i<5; i++)
+    {
+        if (array[i]==6)
+        {
+            sum = sum+6;
+        }
+    }
+    return sum;
+}
+
+//This method checks for a three of a kind.
+int ThreeOfAKind(int array[])
+{
+    int value=0;
+    for (int i=0; i<3;i++)
+    {
+        //checks the values in the next two indexes with the current index to see if they are equal.
+        if (array[i]==array[i+1] && array[i+1]==array[i+2])
+        {
+            value = array[i];
+            //returns the sum if found.
+            return Chance(array);
+        }
+        
+    }
+    return value;
+}
+
+//This method checks for a fourth of a kind.
+int FourOfAKind(int array[])
+{
+    int value=0;
+    for (int i=0; i<2;i++)
+    {
+        //Checks if 4 die are the same.
+        if (array[i]==array[i+1] && array[i+1]==array[i+2] && array[i+2]==array[i+3])
+        {
+            value = array[i];
+            //returns the sum if found.
+            return Chance(array);
+        }
+        
+    }
+    return value;
+}
+
+//This method checks for a Full house which is a three of a kind and a two of a kind.
+int FullHouse(int array[])
+{
+    if (array[0]==array[1] && array[1]==array[2] && array[3]==array[4])
+    {
+        return 25;
+    }
+    if (array[0]==array[1] && array[2]==array[3] && array[3]==array[4])
+    {
+        return 25;
+    }
+    return 0;
+}
+
+//This method checks for a small straight which is 4 numbers in a sequential sequence.
+int SmallStraight(int array[])
+{
+    if ((array[0]==6  && array[1]==5 && array[2]==4 && array[3]==3) || (array[1]==6  && array[2]==5 && array[3]==4 && array[4]==3))
+    {
+        return 30;
+    }
+    if ((array[0]==5  && array[1]==4 && array[2]==3 && array[3]==2) || (array[1]==5  && array[2]==4 && array[3]==3 && array[4]==2))
+    {
+        return 30;
+    }
+    if ((array[0]==4  && array[1]==3 && array[2]==2 && array[3]==1) || (array[1]==4  && array[2]==3 && array[3]==2 && array[4]==1))
+    {
+        return 30;
+    }
+    return 0;
+}
+
+//This method checks for a large straight which is 5 numbers in a sequential sequence.
+int LargeStraight(int array[])
+{
+    if ((array[0]==5  && array[1]==4  && array[2]==3  && array[3]==2  && array[4]==1) || (array[0]==6  && array[1]==5  && array[2]==4  && array[3]==3  && array[4]==2))
+    {
+        return 40;
+    }
+    return 0;
+}
+
+//This method checks for a Yahtzee which is when all 5 die are the same number.
+int Yahtzee(int array[])
+{
+    if (array[0]==array[1] && array[1]==array[2] && array[2]==array[3] && array[3]==array[4] )
+    {
+        return 50;
+    }
+    return 0;
+}
+
+//Displays the score of the player or current turn.
+void displayScore(int array[])
+{
+    cout << "1. Aces: " << array[0] << endl;
+    cout << "2. Twos: " << array[1] << endl;
+    cout << "3. Threes: " << array[2] << endl;
+    cout << "4. Fours: " << array[3] << endl;
+    cout << "5. Fives: " << array[4] << endl;
+    cout << "6. Sixes: " << array[5] << endl;
+    cout << "7. Three of a Kind: " << array[6] << endl;
+    cout << "8. Four of A Kind: " << array[7] << endl;
+    cout << "9. Full House: " << array[8] << endl;
+    cout << "10. Small Straight: " << array[9] << endl;
+    cout << "11. Large Straight: " << array[10] << endl;
+    cout << "12. Yahtzee: " << array[11] << endl;
+    cout << "13. Chance: " << array[12] << endl<<endl;
+}
+
+//Calculates the score and puts each into a score array.
+int * ScoreCalculator(int array[], int scorearray[])
+{
+    scorearray[0] = AddingAce(array);
+    scorearray[1] = AddingTwos(array);
+    scorearray[2] = AddingThrees(array);
+    scorearray[3] = AddingFours(array);
+    scorearray[4] = AddingFives(array);
+    scorearray[5] = AddingSixes(array);
+    scorearray[6] = ThreeOfAKind(array);
+    scorearray[7] = FourOfAKind(array);
+    scorearray[8] = FullHouse(array);
+    scorearray[9] = SmallStraight(array);
+    scorearray[10] = LargeStraight(array);
+    scorearray[11] = Yahtzee(array);
+    scorearray[12] = Chance(array);
+    
+    displayScore(scorearray);
+    return scorearray;
+}
+
+//This method calculates the player's current score.
+int *CurrentPlayerScore(int array[], int scoretracker[])
+{
+    int score=0;
+    int count=0;
+    int counter=0;
+    
+    //This loop checks if there are any possible places to put in a score.
+    for (int i=0; i<13; i++)
+    {
+        if ((array[i]==0 && scoretracker[i]==0) || (array[i]!=0))
+        {
+            counter++;
+        }
+    }
+    
+    //If the value of the previous loop is found to be 13 then a zero must be inputed into the player score.
+    if (counter==13)
+    {
+        while(true)
+        {
+            cout << "Which score would you like to assign a value to? (1,2,3,4,5,6,7,8,9,10,11,12,13?). A zero must be inputed for a score.";
+            cin>>score;
+            if (array[score-1]==0)
+            {
+                break;
+            }
+            
+            if (array[score-1]!=0)
+            {
+                cout << "Invalid Score Assignment. Please choose a score that has a value of zero." <<endl<<endl;
+            }
+        }
+        
+        //Assigns 1111 to the current player score which in this case is a placeholder for zero.
+        array[score]=1111;
+        return array;
+    }
+    
+    
+    while(true)
+    {
+        cout << "Which score would you like to assign a value to? (1,2,3,4,5,6,7,8,9,10,11,12,13?)";
+        cin>>score;
+        if (array[score-1]==0 && scoretracker[score-1]!=0)
+        {
+            break;
+        }
+        //checks if there is a non-zero value in the current location.
+        if (array[score-1]!=0 || scoretracker[score-1]==0)
+        {
+            cout << "Invalid Score Assignment. Please choose a score that does not have a value." <<endl<<endl;
+        }
+    }
+    //replaces the zero in the playerscore with the score found in the turn.
+    array[score-1]=scoretracker[score-1];
+    //checks to see if all values in the player score are filled.
+    for (int i=0; i<13; i++)
+    {
+        if (array[i]!=0)
+        {
+            count++;
+        }
+    }
+    
+    //if counter is 13, the player scoreboard has been filled and the game is complete.
+    if (count==13)
+    {
+        cout << "The game is complete." <<endl;
+        displayScore(array);
+    }
+    return array;
+}
+
+//This method displays the rules of Yahtzee.
+void YahtzeeRules()
+{
+    cout << "RULES OF YAHTZEE" << endl <<  endl;
+    cout << "During the game, the player will have five dice to roll in a round" << endl;
+    cout << "Each round the player will have the option to remove die from the current roll to re-roll in the next round" << endl;
+    cout << "There are a total of three rolls in one run.  So you have the option to re-roll twice to get a better set of die." << endl;
+    cout << "After the round is over a score tab will be displayed and then the player can choose which score to keep out of the inital 13 possible scores"<< endl;
+    cout << "Please keep in mind that once a score has been recorded that score may not be altered in later turns" << endl;
+    cout << "If no score can be changed, then the player must elect to put a zero in one of the remaining spots" << endl;
+    cout << "Once all the spots have been filled, the game is over and a total score is calculated." << endl << endl;
+    cout << "Scoring in Yahtzee" << endl;
+    cout << "1111 Denotes that a score for that value is taken away and not caluculated in the total score"<< endl;
+    cout << "Ace score is computed by adding all the ones in the set of die." << endl;
+    cout << "Twos score is computed by adding all the twos in the set of die." << endl;
+    cout << "Threes score is computed by adding all the threes in the set of die." << endl;
+    cout << "Fours score is computed by adding all the fours in the set of die." << endl;
+    cout << "Fives score is computed by adding all the fives in the set of die." << endl;
+    cout << "Sixes score is computed by adding all the sixes in the set of die." << endl;
+    cout << "Three of a Kind is when 3 of the die in the set are all the same face number.  The score given to a three of a kind is the sum of all the die." << endl;
+    cout << "Four of a Kind is when 4 of the die in the set are all the same face number.  The score given to a four of a kind is the sum of all the die." << endl;
+    cout << "A Small Straight is found when 4 of the die are in chronological order.  For example: '1234'.  The score given to a small straight is 30."<< endl;
+    cout << "A Large Straight is found when 5 of the die are in chronological order.  For example: '12345'.  The score given to a large straight is 40." << endl;
+    cout << "Yahtzee is when all the die are the same face number.  The score is given to a yahtzee is 50." << endl;
+    cout << "Chance is just the sum of all the die." << endl << endl;
+}
+
+//This is the master method for Yahtzee that executes the entire game.
+void MasterYahtzee()
+{
+    int randarray[5];
+    int ScoreTracker[14];
+    int PlayerScore[14];
+    int TotalScore = 0;
+    string exitop;
+    
+    //This loop assigns zero values to all the scores in player score.
+    for (int i=0; i<14; i++)
+    {
+        PlayerScore[i]=0;
+    }
+    //This loop assigns zero values to all the scores in the turn score.
+    for (int i=0; i<14; i++)
+    {
+        ScoreTracker[i]=0;
+    }
+    //This loop runs thirteen times in order to fill up the entire score board for the player.
+    for (int i=0; i<13; i++)
+    {
+        //Option to exit the game.
+        cout << "Would you like to return to the main menu? Please type Yes or No." << endl;
+        cin>>exitop;
+        if (exitop=="Yes")
+        {
+            break;
+        }
+        game(randarray);
+        cout << endl << "Possible Scores for Player Score: "<<endl;
+        ScoreCalculator(randarray,ScoreTracker);
+        CurrentPlayerScore(PlayerScore, ScoreTracker);
+        cout <<endl<< "Current Player Score is: "<<endl<< endl;
+        displayScore(PlayerScore);
+        
+        //This is the total score that is calculated after every turn.
+        TotalScore=0;
+        for (int i=0; i<13;i++)
+        {
+            //If playerscore is 1111 we know that that value is zero so zero is added to total score.
+            if (PlayerScore[i]==1111)
+            {
+                TotalScore = TotalScore+0;
+            }
+            else{
+                TotalScore = TotalScore + PlayerScore[i];
+            }
+            
+        }
+        cout << "Total Score is: " << TotalScore << endl << endl;
+    } 
+}
+
+
+
 
 void displayRules()
 {
@@ -770,12 +1273,13 @@ int main(int argc, const char * argv[]) {
                 cin >> yahtzeeMenu;
                 if(yahtzeeMenu == 1)
                 {
-                    //Displays the rules for go fish
-                    
+                    //Displays the rules for yahtzee
+                    YahtzeeRules();
                 }
                 else if (yahtzeeMenu == 2)
                 {
-                    //play the game
+                    //plays the yahtzee game.
+                    MasterYahtzee();
                 }
                 else if (yahtzeeMenu == 3)
                 {
