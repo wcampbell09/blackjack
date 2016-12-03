@@ -511,8 +511,6 @@ void MasterYahtzee()
 }
 
 
-
-
 void displayRules()
 {
     cout<< "Your aim is to achieve a hand where all the cards add up as close as possible but do not exceed 21.";
@@ -545,21 +543,17 @@ void displayRules()
 }
 
 /*
-Inititalize deck returns an array of strings. Each element in the array is a string value that represents a card.
-52 cards will be put into the array. This is intialized through a series of for loops that put in a card number, 2-10 or face card 
-values of A,K,Q,J. Each for loop also assigns a suit to the card that is either S for spades, D for diamonds, C for clubs, and H for hearts.
-*/
-
+ Inititalize deck returns an array of strings. Each element in the array is a string value that represents a card.
+ 52 cards will be put into the array. This is intialized through a series of for loops that put in a card number, 2-10 or face card
+ values of A,K,Q,J. Each for loop also assigns a suit to the card that is either S for spades, D for diamonds, C for clubs, and H for hearts.
+ */
 string* initializeDeck()
 {
-    //creates the deck 
     string* deck = new string [52];
-    //a string will be used for the cardNum since we also need the suit to be part of the card 
     string cardNum = "";
-    // based on the current value of "int i" cardNum will be set to that card
+    
     for (int i = 0; i<=12; i++)
     {
-        //when i = 9-12 we substitute a number for J,Q,K,A which is obivously Jack, Queen, King, and Ace
         if (i == 9)
         {
             cardNum = "J";
@@ -580,11 +574,10 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
-        // cardNum + S since this particular loop contributes to the "spades" of our deck 
         deck[i]= cardNum + "S";
         
     }
-    // We use 3 more for loops for the 3 remianing suits, they are essentially the same as the first
+    
     for (int i = 0; i<=12; i++)
     {
         if (i == 9)
@@ -609,7 +602,6 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
-        //Since the spades makes up the first part of the deck we must go forward 13 for diamonds
         deck[i+13]= cardNum + "D";
         
     }
@@ -638,7 +630,6 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
-        //move up 26 for Clubs
         deck[i+26]= cardNum + "C";
         
     }
@@ -667,7 +658,6 @@ string* initializeDeck()
         {
             cardNum = to_string(i+2);
         }
-        //move up 39 for hearts
         deck[i+39]= cardNum + "H";
         
     }
@@ -683,42 +673,43 @@ void displayDeck(string deck[])
     }
 }
 /*
-this method shuffles the deck of cards. It takes in the deck array as a parameter. It uses a random generator to swap cards in the
-array to different, random indexes throughout the array. 
-*/
+ this method shuffles the deck of cards. It takes in the deck array as a parameter. It uses a random generator to swap cards in the
+ array to different, random indexes throughout the array.
+ */
 void shuffleDeck(string deck[])
 {
-    int r =0;
+    //random_shuffle(deck->begin(), deck->end());
+    
+    
     //string hold will hold the value of deck[i] so that we may set the random spot in the deck to the value of deck[i]
     string hold;
     for (int i = 0; i <52; i++)
     {
-        srand( static_cast<unsigned int>(time(NULL)));
-        r = rand() % 52 ;
-        hold = deck[i];
-         //the deck at [i] now becomes the value of the deck at the spot of the random integer
-        deck [i]= deck [r];
-        //the deck at spot of the random integer becomes what the value of deck[i] used to be
-        deck [r] = hold;
-        //set hold back equal to nothing before we go to the next i value
-        hold = "";
+        for (int i=0; i<52; i++) {
+            int r = rand() % 52;  // generate a random position
+            string temp = deck[i];
+            //the deck at [i] now becomes the value of the deck at the spot of the random integer
+            deck[i] = deck[r];
+            deck[r] = temp;
     }
+    }
+    
 }
 //method deals cards from the deck array to a hand array (either the player or computers)
 //takes in the deck and either the player or computers hand array as parameters.
 void deal (string deck[], string hand[])
 {
     int i=0;
-    //this loop iterates through the deck until we find a spot in the deck that has a card and is not "empty" 
+    //this loop iterates through the deck until we find a spot in the deck that has a card and is not "empty"
     while (deck[i]== "empty" && i<52)
     {
         i++;
     }
-    // the first spot in the player or computer's hand is now equal to the current value of the deck which should not be empty 
+    // the first spot in the player or computer's hand is now equal to the current value of the deck which should not be empty
     hand [0]=deck [i];
-     //once we assign that card to the hand then that spot becomes "empty" since it's no longer in the virtual deck 
+    //once we assign that card to the hand then that spot becomes "empty" since it's no longer in the virtual deck
     deck [i]= "empty";
-    //this is essentially the same as the first while loop except it gives the user/computer their second card 
+    //this is essentially the same as the first while loop except it gives the user/computer their second card
     while (deck[i]== "empty" && i<52)
     {
         i++;
@@ -747,7 +738,7 @@ void hit (string deck[], string hand [])
 }
 
 //saves who the dealer is in a string, either player or computer based on if player says yes or no.
-//used in blackjack because the dealer wins the tie of a round. 
+//used in blackjack because the dealer wins the tie of a round.
 void getDealer (string option, string &dealer)
 {
     cout << "Do you want to play as dealer: Yes or No?" << endl;
@@ -845,12 +836,12 @@ void blackJack (string deck [], string &dealer)
     int playerFinal =0;//sum of cards from player
     
     int i = 52;//value of number of cards in deck is used to check how many cards are left in pile throughout the game
-                //i is decremented each time a card is dealt, when i reaches 20, the deck will reset and shuffle for
-                //the game to continue. 
+    //i is decremented each time a card is dealt, when i reaches 20, the deck will reset and shuffle for
+    //the game to continue.
     
     int round=1;//the round for the game starts at one and increments for each new round. is displayed throughout the game.
- 
-    int playerValue = 1000;//amount of "money" the player is given to start gambling with 
+    
+    int playerValue = 1000;//amount of "money" the player is given to start gambling with
     
     
     while ((i > 3) && playerValue > 0)
@@ -859,7 +850,7 @@ void blackJack (string deck [], string &dealer)
         //below initializes each hand to null strings
         initializeHand(playerHand);
         initializeHand(compHand);
-       
+        
         playerFinal=0;
         int compFinal=0;//sum of cards from the computer
         
@@ -886,7 +877,7 @@ void blackJack (string deck [], string &dealer)
                 cin.clear();
                 cin.ignore(1000,'\n');
             }
-
+            
             else if(n <= playerValue)//if the player wagers a proper amount, the amount is subtracted from the pot of money they have to gamble
             {
                 playerValue -= n;
@@ -915,7 +906,7 @@ void blackJack (string deck [], string &dealer)
         cout << "Your hand: "<< playerHand [0] << " "<< playerHand [1]<< endl;//shows player their hand
         //the following increments through the players hand and check each element in the array that has a card.
         //if the card is an Ace the player is asked if they would like that ace to be worth 1 or 11. then the playerFinal
-        //value is updated for each card which keeps track of what the players hand adds up to with each card. 
+        //value is updated for each card which keeps track of what the players hand adds up to with each card.
         int j=0;
         while (playerHand[j]!= "" && j<=51)
         {
@@ -931,75 +922,79 @@ void blackJack (string deck [], string &dealer)
             playerFinal=playerFinal+playerCard;
             j++;
         }//ends the while loop
-        //displays to the player what their cards add up to 
+        //displays to the player what their cards add up to
         cout << "Your hand value: " << playerFinal<< endl;
-            //if the hand adds to 21 then the player is finished playing and is not asked to hit or stay because 21 is a winnning hand
-            if (playerFinal==21)
-            {
-                cout << "Your hand value: " << playerFinal<< endl;
-                
-            }
-            //if the players hand doesnt sum to 21 then the player is asked if they would like to hit or stay.  
-            else {
+        //if the hand adds to 21 then the player is finished playing and is not asked to hit or stay because 21 is a winnning hand
+        if (playerFinal==21)
+        {
+            move = "stay";
+            
+        }
+        //if the players hand doesnt sum to 21 then the player is asked if they would like to hit or stay.
+        else {
             cout << "Hit or Stay" << endl;
             cin>> move;
-            }
-            
-            //if player wants to hit, subtracts 1 from i (the card pile) checks values of cards and sums them.
-            //if any cards are an ace the player is asked what value they would like it to hold (1 or 11).
+        }
+        
+        //if player wants to hit, subtracts 1 from i (the card pile) checks values of cards and sums them.
+        //if any cards are an ace the player is asked what value they would like it to hold (1 or 11).
         
         //if move is stay then nothing is done because the player is choosing to leave their hand the way it is
-            if (move == "Stay" || move == "stay"){
-            }
+        if (move == "Stay" || move == "stay"){
+        }
         //if the move is hit the player enters this while loop which allows them to keeo hitting until they choose to stop or the player
-        //hits or goes over 21. 
-            else if (move == "Hit" || "hit" )
-            {
-                
-                while (move == "Hit" || "hit"){
-                    hit (deck, playerHand);
-                    i --;//like before a card is subtracted from the deck for every hit the player chooses
-                    int j=0;
-                  //after a hit the card value is checked and playerfinal is updated to see what the players hand adds up to.
-                    while (playerHand[j]!= "" && j<=51)
-                    {
-                        j++;
-                    }
-                    
-                    cout << playerHand [j-1]<< endl ;// card that was hit is displayed to the player
-                
-                    playerCard=checkCard(playerHand[j-1]);
-                    
-                    if (playerCard==11)// if the card is an ace the player is asked how much they want it to be worth
-                    {
-                        cout << "Would you like your ace to be worth 1 or 11?"<< endl;
-                        cin >> playerCard;
-                    }
-                
-                    playerFinal=playerFinal+playerCard;//playerFinal is updated 
+        //hits or goes over 21.
+        else if (move == "Hit" || "hit" )
+        {
+            
+            while (move == "Hit" || "hit"){
+                hit (deck, playerHand);
+                i --;//like before a card is subtracted from the deck for every hit the player chooses
+                int j=0;
+                //after a hit the card value is checked and playerfinal is updated to see what the players hand adds up to.
+                while (playerHand[j]!= "" && j<=51)
+                {
                     j++;
-                    //if playerFinal is over 21 the player is notified and the program leaves the hit while loop because the player
-                    //is not allowed to continue playing after they have gone over 21( they lost, unless the computer also goes over)
-                    if(playerFinal > 21)
-                    {
-                        cout << "You went over 21" << endl;
-                        break;
-                    }
-                    //The over all hand value is displayed the player
+                }
+                
+                cout << playerHand [j-1]<< endl ;// card that was hit is displayed to the player
+                
+                playerCard=checkCard(playerHand[j-1]);
+                
+                if (playerCard==11)// if the card is an ace the player is asked how much they want it to be worth
+                {
+                    cout << "Would you like your ace to be worth 1 or 11?"<< endl;
+                    cin >> playerCard;
+                }
+                
+                playerFinal=playerFinal+playerCard;//playerFinal is updated
+                j++;
+                //if playerFinal is over 21 the player is notified and the program leaves the hit while loop because the player
+                //is not allowed to continue playing after they have gone over 21( they lost, unless the computer also goes over)
+                if(playerFinal > 21)
+                {
+                    cout << "You went over 21" << endl;
+                    break;
+                }
+                else if (playerFinal == 21)
+                {
+                    move = "stay";
+                }
+                //The over all hand value is displayed the player
+                cout << "Your hand value: " << playerFinal<< endl;
+                //the player is again asked if the want to hit or stay
+                cout << "Hit or Stay?"<<endl;
+                cin>> move;
+                //if they stay then the program exits the hit while loop and playerFinal remains where it is
+                //if player chooses to hit then the program runs through the while loop again.
+                if (move == "Stay" || move == "stay")
+                {
                     cout << "Your hand value: " << playerFinal<< endl;
-                    //the player is again asked if the want to hit or stay
-                    cout << "Hit or Stay?"<<endl;
-                    cin>> move;
-                    //if they stay then the program exits the hit while loop and playerFinal remains where it is
-                    //if player chooses to hit then the program runs through the while loop again. 
-                    if (move == "Stay" || move == "stay")
-                    {
-                        cout << "Your hand value: " << playerFinal<< endl;
-                        break;
-                    }
+                    break;
                 }
             }
-           
+        }
+        
         //the following is for the computer. checks the card values dealt. if any are A's then decides to make 1 or 11 based on
         //value of other card. if the sum of cards is less than 17, then the computer will hit. if it is more than it will stay.
         
@@ -1024,8 +1019,8 @@ void blackJack (string deck [], string &dealer)
             j++;
         }//ends the while loop
         
-        //this runs through to make a decision on what value any Ace should be assigned (1 or 11) if the computer is 
-        //drawn one of those 
+        //this runs through to make a decision on what value any Ace should be assigned (1 or 11) if the computer is
+        //drawn one of those
         if (count>0)
         {
             for (int k = 1; k<=count; k++)
@@ -1042,7 +1037,7 @@ void blackJack (string deck [], string &dealer)
             }
             
         }
-        cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player the computers hand 
+        cout << "Computer hand: "<< compHand [0] << " "<< compHand[1]<< endl;//shows player the computers hand
         cout << "Computer move: " << compFinal<< endl;//shows how much the move was worth
         m=2;
         
@@ -1057,7 +1052,7 @@ void blackJack (string deck [], string &dealer)
             
             compCard = checkCard (compHand [m]);//checks the card that was hit
             
-            //checks to see if the card is an ace again and decides what value to assign it based off of what the 
+            //checks to see if the card is an ace again and decides what value to assign it based off of what the
             //computers hand is worth
             if (compCard == 11 && compFinal <= 10)
             {
@@ -1101,15 +1096,15 @@ void blackJack (string deck [], string &dealer)
             //Gambling portion:
             cout<< "You have $"  << playerValue << endl;
         }
-        //if the computers hand went over 21 and the players didnt then the player wins the round and the money they gambled is added 
-        //to their pot of money 
+        //if the computers hand went over 21 and the players didnt then the player wins the round and the money they gambled is added
+        //to their pot of money
         else if (compFinal > 21 && playerFinal <= 21)
         {
             cout << "You win. Computer hand is over 21"<< endl;
             playerValue += 2*n;
             cout<< "You have $"  << playerValue << endl;
         }
-        //if the players hand is greater than the computers hand and they didnt go over 21, then the player wins the round 
+        //if the players hand is greater than the computers hand and they didnt go over 21, then the player wins the round
         //and the player gets the money that they gambled.
         else if (playerFinal > compFinal && playerFinal <=21)
         {
@@ -1132,8 +1127,8 @@ void blackJack (string deck [], string &dealer)
             }
         }
         cout << endl;
-        //this only runs if the deck has less than 20 cards in it. if it does then the deck is re-initialized and shuffled so that 
-        //the game can continue to run. 
+        //this only runs if the deck has less than 20 cards in it. if it does then the deck is re-initialized and shuffled so that
+        //the game can continue to run.
         if(i< 20)
         {
             i=52;
@@ -1302,7 +1297,6 @@ int main(int argc, const char * argv[]) {
                 else if (rouletteMenu == 2)
                 {
                     //play the game
-                    
                     printMenuRoulette();
                     int rouletteOption = 0;
                     cin >> rouletteOption;
@@ -1312,33 +1306,109 @@ int main(int argc, const char * argv[]) {
                         string playerColor = "";
                         int randomNumber = 0;
                         int moneyWagered = 0;
+                        while(true){
                         cout << "What color do you want to bet on: red or black?" << endl;
                         cin >> playerColor;
-                        while(playerMoney > 0)
+                        cout << "How much would you like to bet?" << endl;
+                        cout << "Your money: $"<< playerMoney << endl;
+                        cin >> moneyWagered;
+                        playerMoney = playerMoney-moneyWagered;
+                        if(playerMoney > 0)
                         {
-                            srand( static_cast<unsigned int>(time(NULL)));
-                            randomNumber = rand() % 37;
-                            cout << "How much would you like to bet?" << endl;
-                            cout << "Your money: $"<< playerMoney << endl;
-                            cin >> moneyWagered;
-                            playerMoney = playerMoney-moneyWagered;
-                            if(playerColor == "red" && (randomNumber == 1 || randomNumber == 3 || randomNumber == 5 || randomNumber == 7 || randomNumber == 9 || randomNumber == 12 || randomNumber == 14 || randomNumber == 16 || randomNumber == 18 || randomNumber == 3 || randomNumber == 19 || randomNumber == 21 || randomNumber == 23 || randomNumber == 25 || randomNumber == 27 || randomNumber == 30 ))
+                            srand(static_cast<unsigned int>(time(NULL)));
+                            randomNumber = rand() % 35 + 1;
+                            if(randomNumber == 1 || randomNumber == 3 || randomNumber == 5 || randomNumber == 7 || randomNumber == 9 || randomNumber == 12 || randomNumber == 14 || randomNumber == 16 || randomNumber == 18 || randomNumber == 3 || randomNumber == 19 || randomNumber == 21 || randomNumber == 23 || randomNumber == 25 || randomNumber == 27 || randomNumber == 30 || randomNumber == 32 || randomNumber == 34 || randomNumber == 36)
                                 {
+                                    if(playerColor == "red")
+                                    {
                                     playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
                                     cout << "Number is: " << randomNumber << " it's red" << endl;
                                     cout << "Your Color: " << playerColor << endl;
                                     cout<< "You won: $" << moneyWagered << endl;
+                                    }
+                                    else if (playerColor == "black"){
+                                        cout << "Number is: " << randomNumber << " it's red" << endl;
+                                        cout << "Your Color: " << playerColor << endl;
+                                        cout<< "You lose: $" << moneyWagered << endl;
+                                    }
                                 }
-                                else if (playerColor == "black")
+                            else
+                            {
+                                if(playerColor == "black")
                                 {
-                                    
+                                    playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                                    cout << "Number is: " << randomNumber << " it's black" << endl;
+                                    cout << "Your Color: " << playerColor << endl;
+                                    cout<< "You won: $" << moneyWagered << endl;
                                 }
+                                else if (playerColor == "red"){
+                                    cout << "Number is: " << randomNumber << " it's black" << endl;
+                                    cout << "Your Color: " << playerColor << endl;
+                                    cout<< "You lose: $" << moneyWagered << endl;
+                                }
+                            }
                         }
-                        cout<< "You lost all money" << endl;
+                        else {
+                            cout<< "You lost all money" << endl;
+                            break;
+                        }
+
+                    }
                     }
                     else if(rouletteOption == 2)
                     {
-                        
+                        int playerMoney = 1000;
+                        string playerEvenOdd = "";
+                        int randomNumber = 0;
+                        int moneyWagered = 0;
+                        while(true){
+                        cout << "Do you want to bet on even or odd?" << endl;
+                        cin >> playerEvenOdd;
+                        cout << "How much would you like to bet?" << endl;
+                        cout << "Your money: $"<< playerMoney << endl;
+                        cin >> moneyWagered;
+                        playerMoney = playerMoney-moneyWagered;
+                        if(playerMoney > 0)
+                        {
+                        srand( static_cast<unsigned int>(time(NULL)));
+                        randomNumber = rand() % 35 + 1;
+                        if (randomNumber % 2 == 0)
+                        {
+                            if(playerEvenOdd == "even")
+                            {
+                                playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                                cout << "Number is: " << randomNumber << " it's even" << endl;
+                                cout << "Your number: " << playerEvenOdd << endl;
+                                cout<< "You won: $" << moneyWagered << endl;
+                            }
+                            else if(playerEvenOdd == "odd") {
+                                cout << "Number is: " << randomNumber << " it's even" << endl;
+                                cout << "Your number: " << playerEvenOdd << endl;
+                                cout<< "You lost: $" << moneyWagered << endl;
+                            }
+                        }
+                        else
+                        {
+                           if(playerEvenOdd == "odd")
+                           {
+                               playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                               cout << "Number is: " << randomNumber << " it's odd" << endl;
+                               cout << "Your number: " << playerEvenOdd << endl;
+                               cout<< "You won: $" << moneyWagered << endl;
+                           }
+                           else if(playerEvenOdd == "even")
+                            {
+                                cout << "Number is: " << randomNumber << " it's odd" << endl;
+                                cout << "Your number: " << playerEvenOdd << endl;
+                                cout<< "You lost: $" << moneyWagered << endl;
+                            }
+                        }
+                        }
+                        else{
+                            cout<< "You lost all money" << endl;
+                            break;
+                        }
+                        }
                     }
                     else if(rouletteOption == 3)
                     {
@@ -1346,18 +1416,20 @@ int main(int argc, const char * argv[]) {
                         string playerChoiceNumber = "";
                         int randomNumber = 0;
                         int moneyWagered = 0;
-                        while(playerMoney > 0)
+                        while(true)
                         {
                             srand( static_cast<unsigned int>(time(NULL)));
                             randomNumber = rand() % 37;
                             cout << "What number would you like to bet on?" << endl;
                             cin >> playerChoiceNumber;
+                            cout << "How much would you like to bet?" << endl;
+                            cout << "Your money: $"<< playerMoney << endl;
+                            cin >> moneyWagered;
+                            playerMoney = playerMoney - moneyWagered;
+                            if(playerMoney > 0)
+                            {
                             if((stoi(playerChoiceNumber) >= 0 && stoi(playerChoiceNumber) <= 36) || playerChoiceNumber == "00")
                             {
-                                cout << "How much would you like to bet?" << endl;
-                                cout << "Your money: $"<< playerMoney << endl;
-                                cin >> moneyWagered;
-                                playerMoney = playerMoney - moneyWagered;
                                 if(randomNumber == 0)
                                 {
                                     cout << "The number is: 0" << endl;
@@ -1967,6 +2039,11 @@ int main(int argc, const char * argv[]) {
                                     }
                                 }
                             }
+                            }
+                            else{
+                                cout<< "You've run out of money" << endl;
+                                break;
+                            }
                         }
                     }
                 else if (rouletteMenu == 3)
@@ -2016,4 +2093,3 @@ int main(int argc, const char * argv[]) {
     }
   }
 }
-
