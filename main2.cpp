@@ -683,6 +683,7 @@ void shuffleDeck(string deck[])
     
     //string hold will hold the value of deck[i] so that we may set the random spot in the deck to the value of deck[i]
     string hold;
+    srand(time(NULL));
     for (int i = 0; i <52; i++)
     {
         for (int i=0; i<52; i++) {
