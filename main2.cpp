@@ -537,11 +537,8 @@ void displayRules()
     cout<< "In this game, the dealer will stand on a soft 17 (where there is an ace being counted for 11 points).";
     
     cout<< "\n\nIn this game, you can take as many cards as you want until you bust.";
-    cout<< "This rule may not be the same in all playing environments.";
-    
-    //Later add insurance, surrender, splitting and doubling down if we chose to allow gambling.
-    
-    /*Whether or not the dealer must hit on a soft 17 (a hand of 17 containing an ace being counted as 11) differs from casino to casino. There might even be blackjack tables with different rules within the same casino.*/
+    cout<< "\nThis rule may not be the same in all playing environments.";
+    cout<< "\nThe game ends when you lose all the money that you waged at the beginning of the game.";
 }
 
 /*
@@ -1441,9 +1438,14 @@ void oldMaid()
 			u++;
 		}
 		people[i]->hand[u] = a;
+		
 		if(a == "JOKER")
 		{
 			cout<< "Player " << i +1 << ": You have the JOKER!" << endl;
+		}
+		else
+		{
+			cout<< "Player " << i << ": You picked up " << a << endl;
 		}
 		people[i]->checkDuplicatesOM();
 		shuffleDeckOM(people[i]->hand, people[i]->length);
