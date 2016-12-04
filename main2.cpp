@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 //This method displays the Dice Face Numbers.
@@ -1451,13 +1453,203 @@ void oldMaid()
 	cout<< "Player " << potentialWinnerOM(people, players) + 1 << " is the winner!";
 }
 
+//this function takes in the overall deck and either the computer or user's hand
+void dealPoker(string deck[], string hand[])
+{
+	int i = 0;
+	//as long as the deck is not empty add to i until we find a spot where we can give the player a card 
+	while (deck[i] == "empty" && i<52)
+	{
+		i++;
+	}
+	//once we find a non empty spot then we can simply give the user or computer 5 cards 
+	//the first open spot in the hand becomes the first open spot in the deck and that part of the deck becomes "empty" 
+	hand[0] = deck[i];
+	deck[i] = "empty";
+	hand[1] = deck[i + 1];
+	deck[i + 1] = "empty";
+	hand[2] = deck[i + 2];
+	deck[i + 2] = "empty";
+	hand[3] = deck[i + 3];
+	deck[i + 3] = "empty";
+	hand[4] = deck[i + 4];
+	deck[i + 4] = "empty";
+
+}
+//simply a for loop to print each value of the deck 
+void displayDeckPoker(string deck[])
+{
+	for (int i = 0; i < 52; i++)
+	{
+		cout << deck[i] << endl;
+	}
+}
+//simply a for loop to print each value of the hand 
+void displayHand(string hand[]) {
+	for (int i = 0; i < 5; i++)
+	{
+		cout << hand[i] << endl;
+	}
+}
+// As part of five-card draw poker you can swap up to 3 cards before the "showdown" 
+//This method takes in the deck, the player's hand, and the card they want to swap 
+void swapCards(string deck[], string hand[], string card) {
+	int i = 0;
+	int k = 0;
+	string n = "";
+	//find the top of the deck that is not "empty" 
+	while (deck[i] == "empty" && i<52)
+	{
+		i++;
+	}
+	//find the spot in the hand that is meant to be swapped 
+	for (int i = 0; i < 5; i++) {
+		if (hand[i] == card) {
+			//k equals that spot 
+			k = i;
+		}
+	}
+	//that spot in the hand now becomes the card that was on top of the deck 
+	hand[k] = deck[i];
+	//that part of the deck is now empty 
+	deck[i] = "empty";
+
+}
+
+//When as user wishes to swap a card I must first check for its existence in their hand via this method 
+bool cardExist(string hand[], string card) {
+	bool boo = false;
+	//boo must be true to swap the card so this sets boo equal to true if it finds the desired card in the user's hand 
+	for (int i = 0; i < 5; i++) {
+		if (hand[i] == card) {
+			boo = true;
+		}
+	}
+	return boo;
+}
+
+//for simplicity a made each rank of hand a "score" this method gets the score for the computer and the user 
+int getScore(string hand[]) {
+	int matches = 0;
+	int score = 0;
+	bool flush = false;
+	bool fullHouse = false;
+	bool fourKind = false;
+
+	//checks the suit of the card to see if the hand is a flsuh 
+	if (hand[0].substr(1, 1) == hand[1].substr(1, 1) && hand[0].substr(1, 1) == hand[2].substr(1, 1) && hand[0].substr(1, 1) == hand[3].substr(1, 1) && hand[0].substr(1, 1) == hand[4].substr(1, 1)) {
+		flush = true;
+		score += 4;
+	}
+
+	//this is for checking pairs or three of a kinds, when two cards have the same value I increment "matches" 
+	for (int i = 0; i < 5; i++) {
+		string str1 = hand[i];
+		for (int j = 0; j<5; j++) {
+			string str2 = hand[j];
+			//substr(0,1) gets the first element of the string which gives it value and disregards the suit 
+			if (str1.substr(0, 1) == str2.substr(0, 1)) {
+				++matches;
+			}
+		}
+
+	}
+	//2 of a kind
+	//I make sure flush is set to false because if there is already a flush it must override rank of hands lower than it 
+	//I figured out how many matches was equivalent to each rank so that is the reason why the matches seem so random 
+	if (matches == 7 && flush == false) {
+		score += 1;
+	}
+	//2 pair 
+	else if (matches == 9 && flush == false) {
+		score += 2;
+	}
+	//3 of a kind
+	else if (matches == 11 && flush == false) {
+		score += 3;
+	}
+	//full house
+	//for full house and four of a kind I must check if score has already been incremented from there being a flush 
+	//since these hands rank higher than flush I simply increment the score 1 or 2 points if there is already a flush 
+	else if (matches == 13 && flush == true) {
+		score += 1;
+	}
+	else if (matches == 13 && flush == false) {
+		score += 5;
+	}
+	// 4 of a kind
+	else if (matches == 17 && flush == true) {
+		score += 2;
+	}
+	else if (matches == 17 && flush == false) {
+		score += 6;
+	}
+	return score;
+}
+
+
+//if neither player has a pair or any hand then we must check to see who has the "high card" 
+int highCard(string hand[]) {
+	int high = 0;
+	bool ace = false;
+	bool king = false;
+	bool queen = false;
+	bool jack = false;
+	//check if the hand contains a face card 
+	for (int i = 0; i < 5; i++) {
+		string str = hand[i];
+		cout << str.substr(0, 1) << endl;
+		if (str.substr(0, 1) == "A") {
+			ace = true;
+		}
+		else if (str.substr(0, 1) == "K") {
+			king = true;
+		}
+		else if (str.substr(0, 1) == "Q") {
+			queen = true;
+		}
+		else if (str.substr(0, 1) == "J") {
+			jack = true;
+		}
+	}
+	int value = 0;
+	string str = "";
+	//if there are no face cards then we simply find the card with the greatest value 
+	if (ace == false && king == false && queen == false && jack == false) {
+		for (int i = 0; i < 5; i++) {
+			str = hand[i].substr(0, 1);
+			value = atoi(str.c_str());
+			if (value > high) {
+				high = value;
+			}
+		}
+	}
+	//scores now become much larger
+	if (ace == true) {
+		return 14;
+	}
+	else if (king == true && ace == false) {
+		return 13;
+	}
+	else if (queen == true && king == false && ace == false) {
+		return 12;
+	}
+	else if (jack == true && queen == false && king == false && ace == false) {
+		return 11;
+	}
+	else {
+		return high;
+	}
+}
+
+
 int main(int argc, const char * argv[]) {
     // QApplication a(argc, argv);
     // blackjack w;
     // w.show();
     
     
-    int option;
+    int option = 0;
     
     cout << "Welcome to the Casino!"<< endl;
     while (option !=3)
@@ -1471,7 +1663,7 @@ int main(int argc, const char * argv[]) {
             int gameOption = 0;
             cout<< "What game would you like to play?" << endl;
             cout<< "1. Blackjack" << endl;
-            cout<< "2. Go fish" << endl;
+            cout<< "2. Five-card Draw Poker" << endl;
             cout<< "3. Slots" << endl;
             cout<< "4. Yahtzee" << endl;
             cout<< "5. Roulette " << endl;
@@ -1509,25 +1701,70 @@ int main(int argc, const char * argv[]) {
             }
             else if (gameOption == 2)
             {
-                int goFishMenu = 0;
-                cout << "Lets play some Go Fish!" << endl;
-                cout << "1. View rules" << endl;
-                cout << "2. Play Go Fish" << endl;
-                cout << "3. Go to main menu" << endl;
-                cin >> goFishMenu;
-                if(goFishMenu == 1)
-                {
-                    //Displays the rules for go fish
-                    
-                }
-                else if (goFishMenu == 2)
-                {
-                    //play the game
-                }
-                else if (goFishMenu == 3)
-                {
-                    option = 1;
-                }
+              string* deck = initializeDeck();
+
+				shuffleDeck(deck);
+
+
+				string compHand[5];
+				string userHand[5];
+				string cardSwap = "";
+				int number = 0;
+
+				dealPoker(deck, userHand);
+				dealPoker(deck, compHand);
+
+				displayHand(userHand);
+				cout << endl;
+				cout << "How many Cards would you like to swap? (can be 0-3 cards) " << endl;
+				cin >> number;
+				while (number != 0 && number != 1 && number != 2 && number != 3) {
+					cout << endl << "Invalid! Must be an integer between 0 and 3 " << endl;
+					cin >> number;
+				}
+				for (int i = 1; i < number + 1; i++) {
+					cout << "What is the next card?" << endl;
+					cin >> cardSwap;
+					while (cardExist(userHand, cardSwap) == false) {
+						cout << endl << "Invalid! must be a card that is in your hand! What is the card? " << endl;
+						cin >> cardSwap;
+					}
+
+					swapCards(deck, userHand, cardSwap);
+					cardSwap = "";
+				}
+				cout << endl << "Here is your new hand" << endl;
+				displayHand(userHand);
+				cout << endl;
+
+				int userScore = getScore(userHand);
+				int compScore = getScore(compHand);
+
+				if (userScore == 0 && compScore == 0) {
+					userScore = highCard(userHand);
+					compScore = highCard(compHand);
+				}
+
+				cout << "This was the computer's hand " << endl;
+				displayHand(compHand);
+				cout << endl << endl << endl;
+
+				cout << endl << "Possible Scores" << endl;
+				cout << "Two of a kind: 1 point" << endl << "Two pair: two points " << endl << "Three of a kind: 3 points" << endl << "Flush: 4 points" << endl;
+				cout << "Full House: 5 points" << endl << "4 of a Kind: 6 points" << endl;
+
+				cout << endl << "User score: " << userScore << endl;
+				cout << endl << "Comp score: " << compScore << endl;
+
+				if (compScore > userScore) {
+					cout << "Computer wins!"<<endl<<endl;
+				}
+				else if (userScore > compScore) {
+					cout << "You win!" << endl<<endl;
+				}
+				else {
+					cout << endl << "Tie!" << endl<<endl;
+				}
             }
             
             else if (gameOption == 3)
@@ -1540,7 +1777,7 @@ int main(int argc, const char * argv[]) {
                 cin >> slotsMenu;
                 if(slotsMenu == 1)
                 {
-                    //Displays the rules for go fish
+                   
                     
                 }
                 else if (slotsMenu == 2)
