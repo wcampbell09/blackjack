@@ -1143,18 +1143,17 @@ void blackJack (string deck [], string &dealer)
 // Starts the slot game
 void slots()
 {
-    int credits = 100;
-    int lineNumber;
-    string cont;
+    int credits = 100; //Designates the amount of credits each player will start with.
+    int lineNumber; //This will be used to determine the amount of lines the player ie betting on. 
     while (true) {
-        if(credits>=0)
+        if(credits>=0) //If statement that checks to see the amount of credits the user has left.
         {
-            cout << "How many lines would you like to bet? (1, 3, 5, or 7)";
+            cout << "How many lines would you like to bet? (1, 3, 5, or 7)"; //Asks the user how many lines they want to bet on & stores that value into lineNumber.
             cin >> lineNumber;
             
-            if (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) {
+            if (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) { //Checks to see if what the player entered was valid.
                 
-                while (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) {
+                while (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) { //If not valid, it will prompt the use to enter another value. Will continue until a correct input is entered.
                     
                     cout << "Invalid input, try again! How many lines would you like to bet? (1, 3, 5, or 7)";
                     cin >> lineNumber;
@@ -1163,7 +1162,7 @@ void slots()
             }
             
             
-            int oneOne = rand() % 3 + 1;
+            int oneOne = rand() % 3 + 1; //These 15 integers are values between 1 and 3 that will be displayed as the outcome of the slot machine.
             int oneTwo = rand() % 3 + 1;
             int oneThree = rand() % 3 + 1;
             int oneFour = rand() % 3 + 1;
@@ -1180,36 +1179,36 @@ void slots()
             int threeFive = rand() % 3 + 1;
             
             
-            if (lineNumber == 1) {
-                int cost = 1;
-                credits = credits - cost;
+            if (lineNumber == 1) { //If the user selected to bet on 1 line, this if statement will be selected.
+                int cost = 1; 
+                credits = credits - cost; //Subtracts 1 from the credits
                 
-                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;  //Displays the "slot machine" using the randomly generated numbers between 1-3.
                 cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
                 cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
                 
-                if (twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                if (twoOne == twoTwo == twoThree == twoFour == twoFive) { //Checks to see if the middle line is a winning line.
                     cout << "You won!" << endl;
-                    cout << "Credits won: 10" << endl;
+                    cout << "Credits won: 10" << endl; //Rewards the player with 10 credits if the line is a winning line.
                     credits += 10;
                     
                 }
                 else {
-                    cout << "You lost! Try again?" << endl;
+                    cout << "You lost! Try again?" << endl; //If the line is not a winning one, the code will prompt the user to try again, and will display the player's remaining credit.
                     cout << "Current Credits: " << credits << endl;
                 }
             }
             
-            else if (lineNumber == 3) {
+            else if (lineNumber == 3) { //If the player chooses to bet on 3 lines, it will go to here.
                 int cost = 3;
                 
-                credits = credits - cost;
+                credits = credits - cost; //subtracts 3 credits from the player's total.
                 
-                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl; //Displays the slot machine with the randomly generated values.
                 cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
                 cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
                 
-                if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) { //All of the following if else statements are every possible combination with 3 lines. If the player spins one of them, they will be rewarded with the displayed amount of credits.
                     cout << "You got all 3?! That's insane!" << endl;
                     cout << "Credits won: 75" << endl;
                     credits += 75;
@@ -1250,21 +1249,21 @@ void slots()
                     
                 }
                 else {
-                    cout << "You lost! Try again?" << endl;
+                    cout << "You lost! Try again?" << endl; //If the spin is not a winning one, this will be displayed along with the player's current credits.
                     cout << "Current Credits: " << credits << endl;
                 }
             }
-            else if (lineNumber == 5) {
+            else if (lineNumber == 5) { //If the player wishes to bet on 5 liness, this will be selected.
                 int cost = 5;
-                credits = credits - cost;
+                credits = credits - cost; //Subtracts 5 credits from the player's total credits.
                 
-                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl; //Displays the results of the randomly generated slot machine.
                 cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
                 cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
                 
                 
                 if (oneOne == oneTwo == oneThree == oneFour == oneFive == twoOne == twoTwo == twoThree == twoFour == twoFive == threeOne == threeTwo == threeThree == threeFour == threeFive) {
-                    cout << "Do my eyes deceive me? Did you really just get all 5??!?" << endl;
+                    cout << "Do my eyes deceive me? Did you really just get all 5??!?" << endl; //Like the results for the 3 line bet, these if else statements are for every possible combination using the 5 line method for a 3x5 slot machine. If one of them is spun, the player will eb rewarded for doing so. 
                     cout << "Credits won: 500" << endl;
                     credits += 500;
                     
@@ -1426,22 +1425,22 @@ void slots()
                 
                 
                 else {
-                    cout << "You lost! Try again?" << endl;
+                    cout << "You lost! Try again?" << endl; //If none of the following combinations are spun, this will be displayed along with the user's total credits.
                     cout << "Current Credits: " << credits << endl;
                 }
                 
             }
-            else if (lineNumber == 7) {
+            else if (lineNumber == 7) { //If the user decides to choose 7 lines to bet on, this will be selected.
                 int cost = 7;
                 
-                credits = credits - cost;
+                credits = credits - cost; //Subtracts 7 credits from the user's total credits.
                 
-                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl; //Displays the results of teh randomly generated slot machine.
                 cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
                 cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
                 
                 if (oneOne == oneTwo == oneThree == oneFour == oneFive == twoOne == twoTwo == twoThree == twoFour == twoFive == threeOne == threeTwo == threeThree == threeFour == threeFive) {
-                    cout << "This shouldn't even be possible. You shouldn't be reading this" << endl;
+                    cout << "This shouldn't even be possible. You shouldn't be reading this" << endl; //Like the bets for 1, 3, and 5 lines, the copious amount of if else statements below are for every single combination of the 7 line slot machine method. If one of these are displayed, the player is rewarded the designated amount.
                     cout << "Credits won: 2500" << endl;
                     credits += 2500;
                     
@@ -1449,31 +1448,31 @@ void slots()
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
                     cout << "Credits won: 1000" << endl;
-                    credits += 1000; //CHECK
+                    credits += 1000; 
                     
                 }
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
                     cout << "Credits won: 1000" << endl;
-                    credits += 1000; //GOOD
+                    credits += 1000; 
                     
                 }
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
                     cout << "Credits won: 1000" << endl;
-                    credits += 1000; //GOOD
+                    credits += 1000; 
                     
                 }
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
                     cout << "Credits won: 1000" << endl;
-                    credits += 1000; //GOOD
+                    credits += 1000; 
                     
                 }
                 else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
                     cout << "Credits won: 1000" << endl;
-                    credits += 1000; //GOOD
+                    credits += 1000; 
                     
                 }
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
@@ -1617,7 +1616,7 @@ void slots()
                 else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You got 4 lines to match! Holy cow!" << endl;
                     cout << "Credits won: 200" << endl;
-                    credits += 200; //END OF OLD ONES
+                    credits += 200; 
                 }
                 else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
                     cout << "You got 4 lines to match! Holy cow!" << endl;
@@ -2074,12 +2073,12 @@ void slots()
                     credits += 10;
                 }
                 else {
-                    cout << "You lost! Try again?" << endl;
+                    cout << "You lost! Try again?" << endl; //If the user does not spin any of the combinatinos above, this will be displayed, along with the player's current credits amount.
                     cout << "Current Credits: " << credits << endl;
                 }
             }
         }
-        else if (credits <= 0){
+        else if (credits <= 0){ //Once the user's credits run out, this else if statement will be displayed, and the game will be ended.
             cout << "You ran out of credits. Game Over!" << endl;
             exit(0);
         }
