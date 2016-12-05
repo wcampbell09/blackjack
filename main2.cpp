@@ -1756,7 +1756,7 @@ int main(int argc, const char * argv[]) {
                     cout << endl << endl << endl;
                     
                     cout << endl << "Possible Scores" << endl;
-                    cout << "Two of a kind: 1 point" << endl << "Two pair: two points " << endl << "Three of a kind: 3 points" << endl << "Flush: 4 points" << endl;
+                    cout << "Two of a kind: 1 point" << endl << "Two pair: 2 points " << endl << "Three of a kind: 3 points" << endl << "Flush: 4 points" << endl;
                     cout << "Full House: 5 points" << endl << "4 of a Kind: 6 points" << endl;
                     
                     cout << endl << "User score: " << userScore << endl;
