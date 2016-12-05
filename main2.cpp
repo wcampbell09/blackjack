@@ -512,7 +512,7 @@ void MasterYahtzee()
     }
 }
 
-
+// Displays the rules for
 void displayRules()
 {
     cout<< "Your aim is to achieve a hand where all the cards add up as close as possible but do not exceed 21.";
@@ -1594,6 +1594,953 @@ int getScore(string hand[])
     return score;
 }
 
+void slots()
+{
+    int credits = 100;
+    int lineNumber;
+    string cont;
+    while (true) {
+        if(credits>=0)
+        {
+            cout << "How many lines would you like to bet? (1, 3, 5, or 7)";
+            cin >> lineNumber;
+            
+            if (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) {
+                
+                while (lineNumber != 1 && lineNumber != 3 && lineNumber != 5 && lineNumber != 7) {
+                    
+                    cout << "Invalid input, try again! How many lines would you like to bet? (1, 3, 5, or 7)";
+                    cin >> lineNumber;
+                    
+                }
+            }
+            
+            
+            int oneOne = rand() % 3 + 1;
+            int oneTwo = rand() % 3 + 1;
+            int oneThree = rand() % 3 + 1;
+            int oneFour = rand() % 3 + 1;
+            int oneFive = rand() % 3 + 1;
+            int twoOne = rand() % 3 + 1;
+            int twoTwo = rand() % 3 + 1;
+            int twoThree = rand() % 3 + 1;
+            int twoFour = rand() % 3 + 1;
+            int twoFive = rand() % 3 + 1;
+            int threeOne = rand() % 3 + 1;
+            int threeTwo = rand() % 3 + 1;
+            int threeThree = rand() % 3 + 1;
+            int threeFour = rand() % 3 + 1;
+            int threeFive = rand() % 3 + 1;
+            
+            
+            if (lineNumber == 1) {
+                int cost = 1;
+                credits = credits - cost;
+                
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
+                cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
+                
+                if (twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You won!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else {
+                    cout << "You lost! Try again?" << endl;
+                    cout << "Current Credits: " << credits << endl;
+                }
+            }
+            
+            else if (lineNumber == 3) {
+                int cost = 3;
+                
+                credits = credits - cost;
+                
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
+                cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
+                
+                if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got all 3?! That's insane!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else {
+                    cout << "You lost! Try again?" << endl;
+                    cout << "Current Credits: " << credits << endl;
+                }
+            }
+            else if (lineNumber == 5) {
+                int cost = 5;
+                credits = credits - cost;
+                
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
+                cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
+                
+                
+                if (oneOne == oneTwo == oneThree == oneFour == oneFive == twoOne == twoTwo == twoThree == twoFour == twoFive == threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "Do my eyes deceive me? Did you really just get all 5??!?" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75; //YES
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                
+                
+                else {
+                    cout << "You lost! Try again?" << endl;
+                    cout << "Current Credits: " << credits << endl;
+                }
+                
+            }
+            else if (lineNumber == 7) {
+                int cost = 7;
+                
+                credits = credits - cost;
+                
+                cout << oneOne << " | " << oneTwo << " | " << oneThree << " | " << oneFour << " | " << oneFive << endl;
+                cout << twoOne << " | " << twoTwo << " | " << twoThree << " | " << twoFour << " | " << twoFive << endl;
+                cout << threeOne << " | " << threeTwo << " | " << threeThree << " | " << threeFour << " | " << threeFive << endl;
+                
+                if (oneOne == oneTwo == oneThree == oneFour == oneFive == twoOne == twoTwo == twoThree == twoFour == twoFive == threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "This shouldn't even be possible. You shouldn't be reading this" << endl;
+                    cout << "Credits won: 2500" << endl;
+                    credits += 2500;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000; //CHECK
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000; //GOOD
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000; //GOOD
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000; //GOOD
+                    
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000; //GOOD
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 6 winning lines! Do you know how lucky that is!?!" << endl;
+                    cout << "Credits won: 1000" << endl;
+                    credits += 1000;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You just got 5 winning lines! Today if your lucky day!" << endl;
+                    cout << "Credits won: 500" << endl;
+                    credits += 500;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                    //oneOne == twoTwo == threeThree == twoFour == oneFive
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200; //END OF OLD ONES
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 4 lines to match! Holy cow!" << endl;
+                    cout << "Credits won: 200" << endl;
+                    credits += 200;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75; //YES
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 3 lines to match! Well done!" << endl;
+                    cout << "Credits won: 75" << endl;
+                    credits += 75;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive && oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 2 lines to match! Well done!" << endl;
+                    cout << "Credits won: 25" << endl;
+                    credits += 25;
+                }
+                else if (twoOne == twoTwo == twoThree == twoFour == twoFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (oneOne == oneTwo == oneThree == oneFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                    
+                }
+                else if (threeOne == threeTwo == threeThree == threeFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (threeOne == twoTwo == oneThree == twoFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (oneOne == twoTwo == threeThree == twoFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (oneOne == oneTwo == twoThree == threeFour == threeFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else if (threeOne == threeTwo == twoThree == oneFour == oneFive) {
+                    cout << "You got 1 line to match! Nice spin!" << endl;
+                    cout << "Credits won: 10" << endl;
+                    credits += 10;
+                }
+                else {
+                    cout << "You lost! Try again?" << endl;
+                    cout << "Current Credits: " << credits << endl;
+                }
+            }
+        }
+        else if (credits <= 0){
+            cout << "You ran out of credits. Game Over!" << endl;
+            exit(0);
+        }
+    }
+    
+}
+
+
 
 //if neither player has a pair or any hand then we must check to see who has the "high card"
 int highCard(string hand[]) {
@@ -1650,24 +2597,797 @@ int highCard(string hand[]) {
 }
 
 
-int main(int argc, const char * argv[]) {
-    // QApplication a(argc, argv);
-    // blackjack w;
-    // w.show();
-    
-    
-    int option = 0;
-    
-    cout << "Welcome to the Casino!"<< endl;
-    while (option !=4)
+
+void roulette()
+{
+    //play the game
+    printMenuRoulette();
+    int rouletteOption = 0;
+    cin >> rouletteOption;
+    if(rouletteOption == 1)
     {
+        int playerMoney = 1000;
+        string playerColor = "";
+        int randomNumber = 0;
+        int moneyWagered = 0;
+        while(true){
+            cout << "What color do you want to bet on: red or black?" << endl;
+            cin >> playerColor;
+            if(playerColor!= "black" && playerColor != "red")
+            {
+                cout << "What color do you want to bet on: red or black?" << endl;
+                cin >> playerColor;
+            }
+            cout << "How much would you like to bet?" << endl;
+            cout << "Your money: $"<< playerMoney << endl;
+            cin >> moneyWagered;
+            playerMoney = playerMoney-moneyWagered;
+            if(playerMoney > 0)
+            {
+                srand(static_cast<unsigned int>(time(NULL)));
+                randomNumber = rand() % 35 + 1;
+                if(randomNumber == 1 || randomNumber == 3 || randomNumber == 5 || randomNumber == 7 || randomNumber == 9 || randomNumber == 12 || randomNumber == 14 || randomNumber == 16 || randomNumber == 18 || randomNumber == 3 || randomNumber == 19 || randomNumber == 21 || randomNumber == 23 || randomNumber == 25 || randomNumber == 27 || randomNumber == 30 || randomNumber == 32 || randomNumber == 34 || randomNumber == 36)
+                {
+                    if(playerColor == "red")
+                    {
+                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                        cout << "Number is: " << randomNumber << " it's red" << endl;
+                        cout << "Your Color: " << playerColor << endl;
+                        cout<< "You won: $" << moneyWagered << endl;
+                    }
+                    else if (playerColor == "black"){
+                        cout << "Number is: " << randomNumber << " it's red" << endl;
+                        cout << "Your Color: " << playerColor << endl;
+                        cout<< "You lose: $" << moneyWagered << endl;
+                    }
+                }
+                else
+                {
+                    if(playerColor == "black")
+                    {
+                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                        cout << "Number is: " << randomNumber << " it's black" << endl;
+                        cout << "Your Color: " << playerColor << endl;
+                        cout<< "You won: $" << moneyWagered << endl;
+                    }
+                    else if (playerColor == "red"){
+                        cout << "Number is: " << randomNumber << " it's black" << endl;
+                        cout << "Your Color: " << playerColor << endl;
+                        cout<< "You lose: $" << moneyWagered << endl;
+                    }
+                }
+            }
+            else {
+                cout<< "You lost all money" << endl;
+                break;
+            }
+            
+        }
+    }
+    else if(rouletteOption == 2)
+    {
+        int playerMoney = 1000;
+        string playerEvenOdd = "";
+        int randomNumber = 0;
+        int moneyWagered = 0;
+        while(true){
+            cout << "Do you want to bet on even or odd?" << endl;
+            cin >> playerEvenOdd;
+            if(playerEvenOdd != "even" && playerEvenOdd != "odd")
+            {
+                cout << "Do you want to bet on even or odd?" << endl;
+                cin >> playerEvenOdd;
+            }
+            cout << "How much would you like to bet?" << endl;
+            cout << "Your money: $"<< playerMoney << endl;
+            cin >> moneyWagered;
+            playerMoney = playerMoney-moneyWagered;
+            if(playerMoney > 0)
+            {
+                srand( static_cast<unsigned int>(time(NULL)));
+                randomNumber = rand() % 35 + 1;
+                if (randomNumber % 2 == 0)
+                {
+                    if(playerEvenOdd == "even")
+                    {
+                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                        cout << "Number is: " << randomNumber << " it's even" << endl;
+                        cout << "Your number: " << playerEvenOdd << endl;
+                        cout<< "You won: $" << moneyWagered << endl;
+                    }
+                    else if(playerEvenOdd == "odd") {
+                        cout << "Number is: " << randomNumber << " it's even" << endl;
+                        cout << "Your number: " << playerEvenOdd << endl;
+                        cout<< "You lost: $" << moneyWagered << endl;
+                    }
+                }
+                else
+                {
+                    if(playerEvenOdd == "odd")
+                    {
+                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
+                        cout << "Number is: " << randomNumber << " it's odd" << endl;
+                        cout << "Your number: " << playerEvenOdd << endl;
+                        cout<< "You won: $" << moneyWagered << endl;
+                    }
+                    else if(playerEvenOdd == "even")
+                    {
+                        cout << "Number is: " << randomNumber << " it's odd" << endl;
+                        cout << "Your number: " << playerEvenOdd << endl;
+                        cout<< "You lost: $" << moneyWagered << endl;
+                    }
+                }
+            }
+            else{
+                cout<< "You lost all money" << endl;
+                break;
+            }
+        }
+    }
+    else if(rouletteOption == 3)
+    {
+        int playerMoney = 1000;
+        string playerChoiceNumber = "";
+        int randomNumber = 0;
+        int moneyWagered = 0;
+        while(true)
+        {
+            srand( static_cast<unsigned int>(time(NULL)));
+            randomNumber = rand() % 37;
+            cout << "What number would you like to bet on between 00 and 37?" << endl;
+            cin >> playerChoiceNumber;
+            if(playerChoiceNumber != "0" && playerChoiceNumber != "1" && playerChoiceNumber != "2" && playerChoiceNumber != "3" && playerChoiceNumber != "4" && playerChoiceNumber != "5" && playerChoiceNumber != "6" && playerChoiceNumber != "7" && playerChoiceNumber != "8" && playerChoiceNumber != "9" && playerChoiceNumber != "10" && playerChoiceNumber != "11" && playerChoiceNumber != "12" && playerChoiceNumber != "13" && playerChoiceNumber != "14" && playerChoiceNumber != "15" && playerChoiceNumber != "16" && playerChoiceNumber != "17" && playerChoiceNumber != "18" && playerChoiceNumber != "19" && playerChoiceNumber != "20" && playerChoiceNumber != "21" && playerChoiceNumber != "22" && playerChoiceNumber != "23" && playerChoiceNumber != "24" && playerChoiceNumber != "25" && playerChoiceNumber != "26" && playerChoiceNumber != "27" && playerChoiceNumber != "28" && playerChoiceNumber != "29"
+               && playerChoiceNumber != "30" && playerChoiceNumber != "31" && playerChoiceNumber != "32"
+               && playerChoiceNumber != "33" && playerChoiceNumber != "34" && playerChoiceNumber != "35"
+               && playerChoiceNumber != "36" && playerChoiceNumber != "37")
+            {
+                cout << "What number would you like to bet on between 00 and 37?" << endl;
+                cin >> playerChoiceNumber;
+            }
+            cout << "How much would you like to bet?" << endl;
+            cout << "Your money: $"<< playerMoney << endl;
+            cin >> moneyWagered;
+            playerMoney = playerMoney - moneyWagered;
+            if(playerMoney > 0)
+            {
+                if((stoi(playerChoiceNumber) >= 0 && stoi(playerChoiceNumber) <= 36) || playerChoiceNumber == "00")
+                {
+                    if(randomNumber == 0)
+                    {
+                        cout << "The number is: 0" << endl;
+                        if (playerChoiceNumber == "0")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 1)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "1")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 2)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "2")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 3)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "3")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 4)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "4")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 5)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "5")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 6)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "6")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 7)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "7")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 8)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "8")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 9)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "9")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 10)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "10")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 11)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "11")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 12)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "12")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 13)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "13")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 14)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "14")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 15)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "15")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 16)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "16")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 17)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "17")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 18)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "18")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 19)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "19")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 20)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "20")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 21)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "21")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 22)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "22")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 23)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "23")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 24)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "24")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 25)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "25")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 26)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "26")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 27)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "27")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 28)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "28")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 29)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "29")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 30)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "30")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 31)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "31")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 32)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "32")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 33)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "33")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 34)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "34")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 35)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "35")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 36)
+                    {
+                        cout << "The number is: " << randomNumber << endl;
+                        if (playerChoiceNumber == "36")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                    else if(randomNumber == 37)
+                    {
+                        cout << "The number is: 00" << endl;
+                        if (playerChoiceNumber == "00")
+                        {
+                            moneyWagered = moneyWagered*35 + moneyWagered;
+                            playerMoney = playerMoney + moneyWagered;
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You won: $" << moneyWagered << endl;
+                        }
+                        else
+                        {
+                            cout << "Your number: " << playerChoiceNumber << endl;
+                            cout << "You lost: $" << moneyWagered << endl;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                cout<< "You've run out of money" << endl;
+                break;
+            }
+        }
+    }
+
+}
+
+// Main contains the menu and methods used
+int main(int argc, const char * argv[]) {
+    int option = 1;
+    cout << "Welcome to the Casino!"<< endl;
+    // Continues asking for menu until right input is put in
+    while (option != option <=0 && option != option >=4)
+    {
+        // Menu for playing a game, looking at about, and exiting
         cout<<"1. Play a game" << endl;
         cout<<"2. About Casino" << endl;
         cout<<"3. Exit"<<endl;
         cin >> option;
-        
+        // Menu for selection of games
         if (option ==1 ){
             int gameOption = 0;
+            
             cout<< "What game would you like to play?" << endl;
             cout<< "1. Blackjack" << endl;
             cout<< "2. Five-card Draw Poker" << endl;
@@ -1677,6 +3397,7 @@ int main(int argc, const char * argv[]) {
             cout<< "6. Old maid" << endl;
             cout<< "7. Main menu" << endl;
             cin >> gameOption;
+            // First game is blackjack, has it's own menu for rules, playing and heading to main menu
             if (gameOption == 1)
             {
                 int blackjackMenu = 0;
@@ -1692,7 +3413,7 @@ int main(int argc, const char * argv[]) {
                 }
                 else if (blackjackMenu == 2)
                 {
-                    //play the game
+                    //Play the game
                     string option="";
                     string dealer = "";
                     getDealer(option, dealer);
@@ -1700,16 +3421,19 @@ int main(int argc, const char * argv[]) {
                     shuffleDeck (deck);
                     blackJack (deck, dealer);
                 }
+                // Goes to main menu
                 else if (blackjackMenu == 3)
                 {
                     option = 1;
                 }
             }
+            // Second game is roulette, has it's own menu for rules, playing and heading to menu
             else if (gameOption == 2)
             {
                 int rounds = 0;
                 cout<< "How many rounds would you like to play?" << endl;
                 cin >> rounds;
+                // Continues for however many rounds user wants to play
                 while(rounds > 0)
                 {
                     string* deck = initializeDeck();
@@ -1728,6 +3452,7 @@ int main(int argc, const char * argv[]) {
                         cout << endl << "Invalid! Must be an integer between 0 and 3 " << endl;
                         cin >> number;
                     }
+                    // Swaps cards unless invalid
                     for (int i = 1; i < number + 1; i++) {
                         cout << "What is the next card?" << endl;
                         cin >> cardSwap;
@@ -1750,13 +3475,13 @@ int main(int argc, const char * argv[]) {
                         userScore = highCard(userHand);
                         compScore = highCard(compHand);
                     }
-                    
+                    // Displays who won and the computers hand
                     cout << "This was the computer's hand " << endl;
                     displayHand(compHand);
                     cout << endl << endl << endl;
                     
                     cout << endl << "Possible Scores" << endl;
-                    cout << "Two of a kind: 1 point" << endl << "Two pair: 2 points " << endl << "Three of a kind: 3 points" << endl << "Flush: 4 points" << endl;
+                    cout << "Two of a kind: 1 point" << endl << "Two pair: two points " << endl << "Three of a kind: 3 points" << endl << "Flush: 4 points" << endl;
                     cout << "Full House: 5 points" << endl << "4 of a Kind: 6 points" << endl;
                     
                     cout << endl << "User score: " << userScore << endl;
@@ -1780,19 +3505,20 @@ int main(int argc, const char * argv[]) {
             else if (gameOption == 3)
             {
                 int slotsMenu = 0;
-                cout << "Lets play some Slots!" << endl;
+                cout << "--Welcome to the Ultimate Slot Game!--" << endl;
+                cout << "   Try your luck with our wonderful slot machine!  " << endl;
                 cout << "1. View rules" << endl;
                 cout << "2. Play Slots" << endl;
                 cout << "3. Go to main menu" << endl;
                 cin >> slotsMenu;
                 if(slotsMenu == 1)
                 {
-                    
-                    
+                    option = 1;
                 }
                 else if (slotsMenu == 2)
                 {
                     //play the game
+                    slots();
                 }
                 else if (slotsMenu == 3)
                 {
@@ -1838,762 +3564,13 @@ int main(int argc, const char * argv[]) {
                 }
                 else if (rouletteMenu == 2)
                 {
-                    //play the game
-                    printMenuRoulette();
-                    int rouletteOption = 0;
-                    cin >> rouletteOption;
-                    if(rouletteOption == 1)
-                    {
-                        int playerMoney = 1000;
-                        string playerColor = "";
-                        int randomNumber = 0;
-                        int moneyWagered = 0;
-                        while(true){
-                            cout << "What color do you want to bet on: red or black?" << endl;
-                            cin >> playerColor;
-                            cout << "How much would you like to bet?" << endl;
-                            cout << "Your money: $"<< playerMoney << endl;
-                            cin >> moneyWagered;
-                            playerMoney = playerMoney-moneyWagered;
-                            if(playerMoney > 0)
-                            {
-                                srand(static_cast<unsigned int>(time(NULL)));
-                                randomNumber = rand() % 35 + 1;
-                                if(randomNumber == 1 || randomNumber == 3 || randomNumber == 5 || randomNumber == 7 || randomNumber == 9 || randomNumber == 12 || randomNumber == 14 || randomNumber == 16 || randomNumber == 18 || randomNumber == 3 || randomNumber == 19 || randomNumber == 21 || randomNumber == 23 || randomNumber == 25 || randomNumber == 27 || randomNumber == 30 || randomNumber == 32 || randomNumber == 34 || randomNumber == 36)
-                                {
-                                    if(playerColor == "red")
-                                    {
-                                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
-                                        cout << "Number is: " << randomNumber << " it's red" << endl;
-                                        cout << "Your Color: " << playerColor << endl;
-                                        cout<< "You won: $" << moneyWagered << endl;
-                                    }
-                                    else if (playerColor == "black"){
-                                        cout << "Number is: " << randomNumber << " it's red" << endl;
-                                        cout << "Your Color: " << playerColor << endl;
-                                        cout<< "You lose: $" << moneyWagered << endl;
-                                    }
-                                }
-                                else
-                                {
-                                    if(playerColor == "black")
-                                    {
-                                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
-                                        cout << "Number is: " << randomNumber << " it's black" << endl;
-                                        cout << "Your Color: " << playerColor << endl;
-                                        cout<< "You won: $" << moneyWagered << endl;
-                                    }
-                                    else if (playerColor == "red"){
-                                        cout << "Number is: " << randomNumber << " it's black" << endl;
-                                        cout << "Your Color: " << playerColor << endl;
-                                        cout<< "You lose: $" << moneyWagered << endl;
-                                    }
-                                }
-                            }
-                            else {
-                                cout<< "You lost all money" << endl;
-                                break;
-                            }
-                            
-                        }
-                    }
-                    else if(rouletteOption == 2)
-                    {
-                        int playerMoney = 1000;
-                        string playerEvenOdd = "";
-                        int randomNumber = 0;
-                        int moneyWagered = 0;
-                        while(true){
-                            cout << "Do you want to bet on even or odd?" << endl;
-                            cin >> playerEvenOdd;
-                            cout << "How much would you like to bet?" << endl;
-                            cout << "Your money: $"<< playerMoney << endl;
-                            cin >> moneyWagered;
-                            playerMoney = playerMoney-moneyWagered;
-                            if(playerMoney > 0)
-                            {
-                                srand( static_cast<unsigned int>(time(NULL)));
-                                randomNumber = rand() % 35 + 1;
-                                if (randomNumber % 2 == 0)
-                                {
-                                    if(playerEvenOdd == "even")
-                                    {
-                                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
-                                        cout << "Number is: " << randomNumber << " it's even" << endl;
-                                        cout << "Your number: " << playerEvenOdd << endl;
-                                        cout<< "You won: $" << moneyWagered << endl;
-                                    }
-                                    else if(playerEvenOdd == "odd") {
-                                        cout << "Number is: " << randomNumber << " it's even" << endl;
-                                        cout << "Your number: " << playerEvenOdd << endl;
-                                        cout<< "You lost: $" << moneyWagered << endl;
-                                    }
-                                }
-                                else
-                                {
-                                    if(playerEvenOdd == "odd")
-                                    {
-                                        playerMoney = playerMoney+moneyWagered*2+ moneyWagered;
-                                        cout << "Number is: " << randomNumber << " it's odd" << endl;
-                                        cout << "Your number: " << playerEvenOdd << endl;
-                                        cout<< "You won: $" << moneyWagered << endl;
-                                    }
-                                    else if(playerEvenOdd == "even")
-                                    {
-                                        cout << "Number is: " << randomNumber << " it's odd" << endl;
-                                        cout << "Your number: " << playerEvenOdd << endl;
-                                        cout<< "You lost: $" << moneyWagered << endl;
-                                    }
-                                }
-                            }
-                            else{
-                                cout<< "You lost all money" << endl;
-                                break;
-                            }
-                        }
-                    }
-                    else if(rouletteOption == 3)
-                    {
-                        int playerMoney = 1000;
-                        string playerChoiceNumber = "";
-                        int randomNumber = 0;
-                        int moneyWagered = 0;
-                        while(true)
-                        {
-                            srand( static_cast<unsigned int>(time(NULL)));
-                            randomNumber = rand() % 37;
-                            cout << "What number would you like to bet on?" << endl;
-                            cin >> playerChoiceNumber;
-                            cout << "How much would you like to bet?" << endl;
-                            cout << "Your money: $"<< playerMoney << endl;
-                            cin >> moneyWagered;
-                            playerMoney = playerMoney - moneyWagered;
-                            if(playerMoney > 0)
-                            {
-                                if((stoi(playerChoiceNumber) >= 0 && stoi(playerChoiceNumber) <= 36) || playerChoiceNumber == "00")
-                                {
-                                    if(randomNumber == 0)
-                                    {
-                                        cout << "The number is: 0" << endl;
-                                        if (playerChoiceNumber == "0")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 1)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "1")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 2)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "2")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 3)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "3")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 4)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "4")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 5)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "5")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 6)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "6")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 7)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "7")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 8)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "8")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 9)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "9")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 10)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "10")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 11)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "11")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 12)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "12")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 13)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "13")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 14)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "14")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 15)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "15")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 16)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "16")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 17)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "17")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 18)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "18")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 19)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "19")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 20)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "20")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 21)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "21")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 22)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "22")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 23)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "23")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 24)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "24")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 25)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "25")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 26)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "26")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 27)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "27")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 28)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "28")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 29)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "29")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 30)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "30")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 31)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "31")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 32)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "32")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 33)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "33")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 34)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "34")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 35)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "35")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 36)
-                                    {
-                                        cout << "The number is: " << randomNumber << endl;
-                                        if (playerChoiceNumber == "36")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                    else if(randomNumber == 37)
-                                    {
-                                        cout << "The number is: 00" << endl;
-                                        if (playerChoiceNumber == "00")
-                                        {
-                                            moneyWagered = moneyWagered*35 + moneyWagered;
-                                            playerMoney = playerMoney + moneyWagered;
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You won: $" << moneyWagered << endl;
-                                        }
-                                        else
-                                        {
-                                            cout << "Your number: " << playerChoiceNumber << endl;
-                                            cout << "You lost: $" << moneyWagered << endl;
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                cout<< "You've run out of money" << endl;
-                                break;
-                            }
-                        }
-                    }
-                    else if (rouletteMenu == 3)
-                    {
-                        option = 1;
-                    }
+                    roulette();
                 }
+                else if (rouletteMenu == 3)
+                {
+                    option = 1;
+                }
+
             }
             else if (gameOption == 6)
             {
@@ -2628,7 +3605,7 @@ int main(int argc, const char * argv[]) {
             cout<<"This game is a collection of casino related games, in some games" <<endl;
             cout<<"you'll be able to bet (fake) money until your money runs out. In" <<endl;
             cout<<"other games your goal is to acquire the most points or beat the" <<endl;
-            cout<<"computer. The games in this collection are, blackjack, five-card" <<endl;
+            cout<<"computer. The games in this collection are: blackjack, five-card" <<endl;
             cout<<"draw poker, slots, yahtzee, roulette and Old maid." << endl;
             
         }
